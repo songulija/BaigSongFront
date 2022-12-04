@@ -1,25 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Container } from 'react-bootstrap'
+import Header from './components/Header';
+import HomeScreen from './screens/HomeScreen';
+import Home from "./screens/home/Home";
+import Hotel from "./screens/hotel/Hotel";
+import List from "./screens/list/List";
+import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  return (//have to wrap entire App in Router in order to use it
+    <Router>
+      {/* <Header /> */}
+      <main className='py-3'>
+        <Container>
+          <Routes>
+            <Route path='/login' element={<LoginScreen history=''/>} />
+            <Route path='/register' element={<RegisterScreen history=''/>} />
+            {/* <Route path='/' element={<HomeScreen/>} /> */}
+            <Route path="/" element={<Home/>}/>
+            <Route path="/hotels" element={<List/>}/>
+            <Route path="/hotels/:id" element={<Hotel/>}/>
+          </Routes>
+        </Container>
+      </main>
+    </Router>
   );
 }
 
