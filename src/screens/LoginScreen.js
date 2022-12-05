@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Form, Button, Col, Row, Container } from 'react-bootstrap'
-import { login } from '../redux/actions/usersActions'
+import { login, getUserData } from '../redux/actions/usersActions'
 import { Link, useNavigate } from 'react-router-dom'
 
 function LoginScreen() {
@@ -23,6 +23,7 @@ function LoginScreen() {
     const submitHandler = (e) => {
         e.preventDefault();
         dispatch(login(email, password, () => {
+            dispatch(getUserData());
             navigate('/');
         }));
     }
