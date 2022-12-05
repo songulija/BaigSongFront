@@ -15,25 +15,23 @@ import './Header.css'
 // })
 
 function Header() {
-    const [categories, setCategories] = useState([]);
     const dispatch = useDispatch();
 
     //check if user is logged in. getting  userLogin state
     const usersReducer = useSelector((state) => state.usersReducer);
     const { currentUser } = usersReducer;
 
-    const fetchData = useCallback(async () => {
-        let response = await axios.get('/api/categories');
-        setCategories(response.data);
-    }, []);
+    // const fetchData = useCallback(async () => {
+    //     let response = await axios.get('/api/categories');
+    //     setCategories(response.data);
+    // }, []);
     const logoutHandler = () => {
         dispatch(logout());
-        console.log('Logout')
     }
     // if fetchData is changed it will trigger useEffect again
-    useEffect(() => {
-        fetchData();
-    }, [fetchData]);
+    // useEffect(() => {
+    //     fetchData();
+    // }, [fetchData]);
 
     return (
         <>

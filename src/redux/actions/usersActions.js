@@ -1,6 +1,8 @@
 import realestateAPI from "./realestateAPI"
+import jwt_decode from "jwt-decode"
+import Cookies from 'js-cookie'
 
-export const login = (email, password) => async (dispatch) => {
+export const login = (email, password, callback) => async (dispatch) => {
     try {
         dispatch({//first dispatch action with type/name USER_LOGIN_REQUEST. reducer will caught it. and set loading to true
             type: 'USER_LOGIN_REQUEST'
@@ -25,10 +27,19 @@ export const login = (email, password) => async (dispatch) => {
             payload: response.data
         })
 
-        //then we want to set our user to local storage. set this 'userInfo' and pass data as as string(json)
-        localStorage.setItem('currentUser', response.data.token);
+        var inFifteenMinutes = new Date(new Date().getTime() + 50 * 60 * 1000);
+        Cookies.set('currentUser', response.data.token, {
+            expires: inFifteenMinutes
+        });
+        const userData = jwt_decode(response.data.token);
 
+        if (userData['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] === 'ADMINISTRATOR') {
+            Cookies.set('role', 'ADMINISTRATOR', {
+                expires: inFifteenMinutes
+            });
+        }
 
+        callback();
     } catch (error) {//if something fails then dispatch action with type/name PRODUCT_DETAILS_FAIL and pass error data as payload
         dispatch({
             type: 'USER_LOGIN_FAIL',
@@ -37,9 +48,30 @@ export const login = (email, password) => async (dispatch) => {
     }
 }
 
+export const getUserData = () => (dispatch, getState) => {
+    try {
+        dispatch({
+            type: 'USER_DATA_SUCCESS',
+            payload: Cookies.get('role')
+        });
+        console.log('Have role in cookie')
+
+    } catch (error) {
+        dispatch({
+            type: 'USER_DATA_FAIL',
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        })
+    }
+}
+
 export const logout = () => (dispatch) => {
-    localStorage.removeItem('currentUser')
-    dispatch({ type: 'USER_LOGOUT' })
+    Cookies.remove('currentUser')
+    Cookies.remove('role')
+    dispatch({ type: 'USER_LOGOUT' });
+    dispatch({ type: 'USER_DATA_REMOVE' });
 }
 
 
@@ -86,27 +118,3 @@ export const register = (postObject) => async (dispatch) => {
 
 }
 
-export const getUserId = (num,callback) => async(dispatch, getState)=>{
-    try{
-        dispatch({
-            type: 'USER_DATA_REQUEST'
-        });
-        const { usersReducer: { currentUser } } = getState();//get user info
-        console.log('getUserId token is:'+JSON.stringify(currentUser))
-        const response = await realestateAPI.get('/api/accounts',{headers: {Authorization: `Bearer ${currentUser}`}});
-        console.log('action getUserId: '+response.data);
-        dispatch({
-            type: 'USER_DATA_SUCCESS',
-            payload: response.data
-        });
-        callback()
-    }catch(error){
-        dispatch({
-            type: 'USER_DATA_FAIL',
-            payload:
-                error.response && error.response.data.message
-                    ? error.response.data.message
-                    : error.message,
-        })
-    }
-}

@@ -16,7 +16,7 @@ function App() {
       <main className='py-3'>
         <Container>
           <Routes>
-            <Route path='/login' element={<LoginScreen history=''/>} />
+            <Route path='/login' element={<LoginScreen />} />
             <Route path='/register' element={<RegisterScreen history=''/>} />
             {/* <Route path='/' element={<HomeScreen/>} /> */}
             <Route path="/" element={<Home/>}/>

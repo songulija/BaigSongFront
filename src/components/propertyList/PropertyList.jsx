@@ -1,9 +1,41 @@
 import "./propertyList.css";
+import React, { useState, useEffect } from 'react'
+import { getPropertyTypes } from '../../redux/actions/propertyTypesActions'
+import { Form, Button, Col, Row, Container } from 'react-bootstrap'
+import { useDispatch, useSelector } from "react-redux";
 
-const PropertyList = () => {
+const PropertyList = ({ history }) => {
+  const dispatch = useDispatch()
+  const propertyTypesReducer = useSelector(state => state.propertyTypesReducer)
+  const { loading, error, propertyTypes } = propertyTypesReducer
+
+  useEffect(() => {
+    dispatch(getPropertyTypes())
+  }, [dispatch])
   return (
-    <div className="pList">
-      <div className="pListItem">
+    <Container>
+      <h2 style={{ padding: 10 }}>Property Type</h2>
+      {propertyTypes ?
+        <Row>
+          {propertyTypes.map((propertyType, i) => (
+            <Col md={4} lg={3}>
+              <Container>
+                <img
+                  src={propertyType.photo}
+                  alt=""
+                  className="pListImg"
+                />
+                <div className="pListTitles">
+                  <h1>{propertyType.title}</h1>
+                  <h2>233 hotels</h2>
+                </div>
+              </Container>
+            </Col>
+          ))}
+        </Row> :
+        <Container></Container>
+      }
+      {/* <div className="pListItem">
         <img
           src="https://cf.bstatic.com/xdata/images/xphoto/square300/57584488.webp?k=bf724e4e9b9b75480bbe7fc675460a089ba6414fe4693b83ea3fdd8e938832a6&o="
           alt=""
@@ -57,8 +89,8 @@ const PropertyList = () => {
           <h1>Cabins</h1>
           <h2>2331 hotels</h2>
         </div>
-      </div>
-    </div>
+      </div> */}
+    </Container>
   );
 };
 

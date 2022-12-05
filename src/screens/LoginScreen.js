@@ -2,29 +2,29 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Form, Button, Col, Row, Container } from 'react-bootstrap'
 import { login } from '../redux/actions/usersActions'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
-function LoginScreen({ history }) {
+function LoginScreen() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const usersReducer = useSelector(state => state.usersReducer)
     const { loading, error, currentUser } = usersReducer
 
     useEffect(() => {
         if (currentUser) {
-            history.push('/');
+            navigate('/');
         }
-    }, [currentUser, history])
+    }, [currentUser, navigate])
 
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(login(email, password));
-        if (currentUser) {
-            history.push('/');
-        }
+        dispatch(login(email, password, () => {
+            navigate('/');
+        }));
     }
     return (
         <Container>
