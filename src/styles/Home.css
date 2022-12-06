@@ -1,0 +1,178 @@
+/* background-image: url('http://www.rivita.lt/wp-content/uploads/2019/03/Slidas4.png'); */
+.header-img{
+    width: 100%;
+    background-image: url('../images/main_2_big.jpg');
+    background-size: cover;
+    overflow: hidden;
+    padding-right: 0;
+    padding-left: 0;
+    position: relative;
+    background-repeat: no-repeat;
+    /* background-position: right; */
+}
+.main2{
+    height: 100%;
+    width:  100%;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    margin-bottom: 40px;
+}
+
+.header-content{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: center; 
+    margin-left: 15px;
+}
+.header-content h3{
+    color: #fff6ef !important;
+    font-size: 25px;
+    font-weight: 600;
+    /* letter-spacing: 0px; */
+    /* line-height: 64px; */
+}
+.header-content h1{
+    color: #fff6ef!important;
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: 0px;
+    /* line-height: 40px */
+}
+
+.about-us-hover img{
+    width: 65px;
+    color: #7a9193;
+    padding: 8px;
+    background-color: white;
+    border-radius: 90px;
+    border: solid;
+    border-width: 2px;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out ;
+}
+.about-us-hover img:hover{
+    
+    background-color: #7a9193;
+}
+
+.about-us-button{
+    padding: 10px 40px;
+    color: white;
+    background-color: #4C686E;
+    font-size: 18px;
+    margin-top: 10px,;    
+    border: none;
+    border-radius: 8px;
+    -webkit-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -o-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out ;
+}
+.about-us-button:hover{
+    background-color: #425359;
+}
+
+
+.service-icons-style  {
+    font-size: 70px;
+    margin-top: 40px;
+}
+
+.service-container-style  {
+    width: 150px;
+    height:150px;
+    border-radius: 90px;
+    background-color:white;
+    color: #20252B;
+}
+
+.service-container-style:hover  {
+    
+    color: #516c71 !important;
+    transition: all .5s;
+    box-shadow: 9px 9px 9px 9px rgba(0, 0, 0, 0.2) !important;
+}
+
+
+.kroviniai{
+    width: 100%;
+    padding-left: 0;
+    padding-right: '0';
+    background-image: url("../images/wagons-main-1.jpg");
+    background-size: cover;
+    overflow: hidden;
+}
+
+.partners-hover{
+    /* 
+     margin-top:20px;
+      width: 204px;
+      padding: 0; */
+      /* height: 195px; */
+    -webkit-transition: all 0.5s ease-out;
+    -moz-transition: all 0.5s ease-out;
+    -o-transition: all 0.5s ease-out;
+    transition: all 0.5s ease-out ;
+}
+.partners-hover:hover{
+    box-shadow: 6px 6px 6px 6px rgba(0, 0, 0, 0.2) !important;
+
+    
+}
+
+.contacts-info-icons-style  {
+    font-size:50px;
+    color: black;
+    padding-bottom: 10px;
+    color: #4C686E;
+    -webkit-transition: all 0.5s ease-out;
+    -moz-transition: all 0.5s ease-out;
+    -o-transition: all 0.5s ease-out;
+    transition: all 0.5s ease-out ;
+
+}
+.contacts-hover:hover i{
+    
+    color: #5f1508;
+    
+}
+@media only screen and (min-width: 768px){
+    .header-content{
+        align-items: center;
+        justify-content: center; 
+    }
+}
+@media only screen and (min-width: 992px){
+    .main2{
+        padding-top: 170px !important;
+        padding-bottom: 170px !important;
+    }
+
+    .header-content h3{
+        color: #fff6ef !important;
+        font-size: 35px;
+        font-weight: 700;
+        /* letter-spacing: 0px; */
+        line-height: 64px;
+    }
+    .header-content h1{
+        color: #fff6ef!important;
+        font-size: 54px;
+        font-weight: 700;
+        letter-spacing: 0px;
+        line-height: 40px
+    }
+}
+
+@media only screen and (min-width: 1200px){
+    .main2{
+        padding-top: 150px !important;
+        padding-bottom: 300px !important;
+    }
+
+}
+
+

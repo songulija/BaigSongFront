@@ -1,6 +1,6 @@
-import "./apartmentProperties.css";
+import "../styles/apartmentProperties.css";
 import React, { useState, useEffect } from 'react'
-import { getPropertiesByPropertyTypeId } from '../../redux/actions/propertiesActions'
+import { getPropertiesByPropertyTypeId } from '../redux/actions/propertiesActions'
 import { Form, Button, Col, Row, Container } from 'react-bootstrap'
 import { useDispatch, useSelector } from "react-redux";
 const ApartmentProperties = () => {
@@ -34,9 +34,6 @@ const ApartmentProperties = () => {
               </Container>
             </Col>
           ))}
-          <div className="fpItem">
-
-          </div>
           {/* <div className="fpItem">
         <img
           src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/215955381.jpg?k=ff739d1d9e0c8e233f78ee3ced82743ef0355e925df8db7135d83b55a00ca07a&o=&hp=1"

@@ -1,6 +1,6 @@
-import "./propertyList.css";
+import "../styles/propertyList.css";
 import React, { useState, useEffect } from 'react'
-import { getPropertyTypes } from '../../redux/actions/propertyTypesActions'
+import { getPropertyTypes} from '../redux/actions/propertyTypesActions'
 import { Form, Button, Col, Row, Container } from 'react-bootstrap'
 import { useDispatch, useSelector } from "react-redux";
 

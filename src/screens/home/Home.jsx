@@ -1,28 +1,21 @@
 import { Container } from "react-bootstrap";
-import Featured from "../../components/featured/Featured";
-import HouseProperties from "../../components/houseProperties/HouseProperties";
-import Footer from "../../components/footer/Footer";
+import Footer from "../../components/Footer";
 // import Header from "../../components/header/Header";
 import Header from '../../components/Header'
-import MailList from "../../components/mailList/MailList";
-import PropertyList from "../../components/propertyList/PropertyList";
+import MailList from "../../components/MailList";
+import PropertyList from "../../components/PropertyList";
 import "./home.css";
-import ApartmentProperties from "../../components/apartmentProperties/ApartmentProperties";
+import ApartmentProperties from "../../components/ApartmentProperties";
 
 const Home = () => {
   return (
-    <Container>
-      {/* <Navbar /> */}
-      <Header />
       <Container>
         {/* <Featured /> */}
         <PropertyList />
         <ApartmentProperties />
-        {/* <HouseProperties /> */}
         <MailList />
         <Footer />
       </Container>
-    </Container>
   );
 };
 
