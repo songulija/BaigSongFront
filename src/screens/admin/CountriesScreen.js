@@ -5,10 +5,11 @@ import { PlusOutlined } from '@ant-design/icons'
 import { Button } from "react-bootstrap";
 import "../../styles/Login.css";
 import { tableCardStyle, tableCardBodyStyle, buttonStyle } from '../../styles/customStyles.js';
-import { getUsers, createUser, updateUser, deleteUser } from '../../redux/actions/userListActions'
+import { getCountries, createCountry, updateCountry, deleteCountry } from '../../redux/actions/countriesActions'
 import { useNavigate } from 'react-router-dom'
-import AddUserComponent from '../../components/usersComponents/AddUserComponent';
-import UpdateUserComponent from '../../components/usersComponents/UpdateUserComponent';
+import AddCountryComponent from '../../components/countriesComponents/AddCountryComponent';
+import UpdateCountryComponent from '../../components/countriesComponents/UpdateCountryComponent';
+import moment from 'moment';
 
 const aboutTitleTextStyle = {
     fontStyle: 'normal',
@@ -25,16 +26,16 @@ const textStyle = {
     lineHeight: '22px',
     marginRight: '40px',
 }
-function UsersScreen() {
+function CountriesScreen() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const usersReducer = useSelector((state) => state.usersReducer);
     const userInfoReducer = useSelector((state) => state.userInfoReducer);
-    const usersListReducer = useSelector((state) => state.usersListReducer)
+    const countriesListReducer = useSelector((state) => state.countriesListReducer)
     const { currentUser } = usersReducer;
     const { role } = userInfoReducer;
-    const { users } = usersListReducer;
+    const { countries } = countriesListReducer;
 
 
     const [addPanel, setAddPanel] = useState(false)
@@ -63,17 +64,17 @@ function UsersScreen() {
     }
 
     const updateRecord = (postObj, reducerObj) => {
-        dispatch(updateUser(postObj, reducerObj))
+        dispatch(updateCountry(postObj, reducerObj))
         unshowUpdateModal()
     }
 
     const addNewRecord = (postObj) => {
-        dispatch(createUser(postObj))
+        dispatch(createCountry(postObj))
         setAddPanel(false)
     }
 
     const deleteRecord = (id) => {
-        dispatch(deleteUser(id))
+        dispatch(deleteCountry(id))
     }
 
     const columns = [
@@ -94,34 +95,26 @@ function UsersScreen() {
             )
         },
         {
-            title: 'Email',
-            dataIndex: 'email',
+            title: 'Title',
+            dataIndex: 'title',
             width: '40%',
             render: (value, record, rowIndex) => (
                 <p>{value ? value : ''}</p>
             )
         },
         {
-            title: 'Phone Number',
-            dataIndex: 'phoneNumber',
-            width: '40%',
-            render: (value, record, rowIndex) => (
-                <p>{value ? value : ''}</p>
-            )
-        },
-        {
-            title: 'Role',
-            dataIndex: 'UserType',
+            title: 'Date',
+            dataIndex: 'date',
             width: '20%',
             render: (value, record, rowIndex) => (
-                <p>{record !== null ? record.userType.title : ''}</p>
+                <p>{value? moment(value).format("YYYY/MM/DD") : ''}</p>
             )
         }
     ]
 
     useEffect(() => {
         if (currentUser !== null && role === "ADMINISTRATOR") {
-            dispatch(getUsers())
+            dispatch(getCountries())
         } else {
             navigate('/')
         }
@@ -133,9 +126,9 @@ function UsersScreen() {
                     <Row gutter={16}>
                         <Col span={16}>
                             <div style={{ marginRight: '40px' }}>
-                                <Typography.Title style={{ ...aboutTitleTextStyle }}>Users</Typography.Title>
+                                <Typography.Title style={{ ...aboutTitleTextStyle }}>Countries</Typography.Title>
                                 <Typography.Text style={{ ...textStyle }}>
-                                    Add Users.
+                                    Add Countries.
                                 </Typography.Text>
                             </div>
                         </Col>
@@ -148,24 +141,24 @@ function UsersScreen() {
                                 <Table
                                     rowKey="id"
                                     columns={columns}
-                                    dataSource={users ? users : []}
+                                    dataSource={countries ? countries : []}
                                     pagination={{ pageSize: 10 }}
                                     bordered
                                     scroll={{ x: 'calc(700px + 50%)' }}
                                 // footer={() => (<Space style={{ display: 'flex', justifyContent: 'space-between' }}><Button size="large" style={{ ...buttonStyle }} onClick={this.onOpenAddCompany()}><PlusOutlined />Pridėti kompaniją</Button></Space>)}
                                 />
-                                <Space style={{ display: 'flex', justifyContent: 'space-between' }}><Button size="large" style={{ ...buttonStyle }} onClick={showAddPanel}><PlusOutlined />Add User</Button></Space>
+                                <Space style={{ display: 'flex', justifyContent: 'space-between' }}><Button size="large" style={{ ...buttonStyle }} onClick={showAddPanel}><PlusOutlined />Add Country</Button></Space>
                             </Card>
                         </Col>
                     </Row>
                 </Col>
             </div>
             {addPanel !== false ?
-                <AddUserComponent visible={addPanel} onClose={unshowAddPanel}
+                <AddCountryComponent visible={addPanel} onClose={unshowAddPanel}
                     save={addNewRecord} />
                 : null}
             {updatePanel.visibility !== false ?
-                <UpdateUserComponent visible={updatePanel.visibility} save={updateRecord}
+                <UpdateCountryComponent visible={updatePanel.visibility} save={updateRecord}
                     onClose={unshowUpdateModal} record={updatePanel.record} />
                 : null}
         </>
@@ -174,4 +167,4 @@ function UsersScreen() {
 }
 
 //connect to redux states, defining all action that we will use
-export default UsersScreen
+export default CountriesScreen

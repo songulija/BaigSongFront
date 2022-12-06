@@ -23,13 +23,7 @@ function AddUserComponent(props) {
         props.onClose();
     }
     const saveChanges = () => {
-        const userClone = JSON.parse(JSON.stringify(user));
-        const postObj = {
-            "email": userClone.email,
-            "password": userClone.password,
-            "phoneNumber": userClone.phoneNumber,
-            "typeId": userClone.typeId
-        }
+        const postObj = JSON.parse(JSON.stringify(user));
         props.save(postObj);
     }
 

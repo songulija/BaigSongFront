@@ -6,6 +6,7 @@ import { usersListReducer } from './reducers/usersListReducer';
 import { propertyTypesReducer } from './reducers/propertyTypesReducer';
 import { propertiesReducer } from './reducers/propertiesReducer';
 import { userTypesReducer } from './reducers/userTypesReducer';
+import { countriesListReducer } from './reducers/countriesReducer';
 import Cookies from 'js-cookie';
 
 const allReducers = combineReducers({
@@ -14,7 +15,8 @@ const allReducers = combineReducers({
     propertiesReducer,
     userInfoReducer,
     usersListReducer,
-    userTypesReducer
+    userTypesReducer,
+    countriesListReducer
 });
 //we want to get userInfo from localStorage if its there. if its  there we need to convert JSON string into object
 const userInfoFromStorage = Cookies.get('currentUser') ? Cookies.get('currentUser') : null;
