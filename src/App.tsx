@@ -10,6 +10,7 @@ import UsersScreen from './screens/admin/UsersScreen';
 import Header from './components/Header';
 import CountriesScreen from './screens/admin/CountriesScreen';
 import CitiesScreen from './screens/admin/CitiesScreen';
+import PropertyTypesScreen from './screens/admin/PropertyTypesScreen';
 
 function App() {
   return (//have to wrap entire App in Router in order to use it
@@ -30,6 +31,7 @@ function App() {
             <Route path="/users/admin" element={<UsersScreen />} />
             <Route path="/countries/admin" element={<CountriesScreen />} />
             <Route path="/cities/admin" element={<CitiesScreen />} />
+            <Route path="/property-types/admin" element={<PropertyTypesScreen />} />
           </Routes>
         </Container>
       </main>
