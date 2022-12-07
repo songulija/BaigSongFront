@@ -4,11 +4,10 @@ import {Form} from 'react-bootstrap'
 import Button from "react-bootstrap/Button";
 import {ArrowLeftOutlined} from '@ant-design/icons'
 import moment from 'moment';
-import {getCountries} from '../../redux/actions/countriesActions';
 
 const {Option} = Select;
 
-function AddPropertyTypeComponent(props) {
+function AddCommentTypeComponent(props) {
     const [propertyType, setPropertyType] = useState({
         title: '',
         date: moment().format('YYYY/MM/DD'),
@@ -71,4 +70,4 @@ function AddPropertyTypeComponent(props) {
     )
 }
 
-export default AddPropertyTypeComponent
+export default AddCommentTypeComponent

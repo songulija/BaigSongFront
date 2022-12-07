@@ -1,19 +1,19 @@
 import realestateAPI from './realestateAPI';
-export const getCities = () => async(dispatch,getState) =>{
+export const getComments = () => async(dispatch,getState) =>{
     try {
         dispatch({
-            type: 'CITIES_LIST_FETCH_REQUEST'
+            type: 'COMMENTS_LIST_FETCH_REQUEST'
         });
         const token = getState().usersReducer.currentUser;
-        const response = await realestateAPI.get('/api/Cities',{ headers: { Authorization: `Bearer ${token}` } })
+        const response = await realestateAPI.get('/api/Comments',{ headers: { Authorization: `Bearer ${token}` } })
 
         dispatch({
-            type: 'CITIES_LIST_FETCH_SUCCESS',
+            type: 'COMMENTS_LIST_FETCH_SUCCESS',
             payload: response.data,
         });
     } catch (error) {
         dispatch({
-            type: 'CITIES_LIST_FETCH_FAIL',
+            type: 'COMMENTS_LIST_FETCH_FAIL',
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message
@@ -23,21 +23,21 @@ export const getCities = () => async(dispatch,getState) =>{
 }
 
 
-export const createCity = (postObject) => async (dispatch, getState) => {
+export const createComment = (postObject) => async (dispatch, getState) => {
     try {
         dispatch({
-            type: 'CITIES_LIST_CREATE_REQUEST'
+            type: 'COMMENTS_LIST_CREATE_REQUEST'
         });
         //get token from usersReducer
         const token = getState().usersReducer.currentUser;
-        const response = await realestateAPI.post(`/api/Cities`, postObject, { headers: { Authorization: `Bearer ${token}` } })
+        const response = await realestateAPI.post(`/api/Comments`, postObject, { headers: { Authorization: `Bearer ${token}` } })
         dispatch({
-            type: 'CITIES_LIST_CREATE_SUCCESS',
+            type: 'COMMENTS_LIST_CREATE_SUCCESS',
             payload: response.data
         });
     } catch (error) {
         dispatch({
-            type: 'CITIES_LIST_CREATE_FAIL',
+            type: 'COMMENTS_LIST_CREATE_FAIL',
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message
@@ -47,21 +47,21 @@ export const createCity = (postObject) => async (dispatch, getState) => {
 }
 
 
-export const updateCity = (postObj, reducerObj) => async (dispatch, getState) => {
+export const updateComment = (postObj, reducerObj) => async (dispatch, getState) => {
     try {
         dispatch({
-            type: 'CITIES_LIST_UPDATE_REQUEST'
+            type: 'COMMENTS_LIST_UPDATE_REQUEST'
         });
         //get token from usersReducer
         const token = getState().usersReducer.currentUser;
-        await realestateAPI.put(`/api/Cities/${reducerObj.id}`, postObj, { headers: { Authorization: `Bearer ${token}` } })
+        await realestateAPI.put(`/api/Comments/${reducerObj.id}`, postObj, { headers: { Authorization: `Bearer ${token}` } })
         dispatch({
-            type: 'CITIES_LIST_UPDATE_SUCCESS',
+            type: 'COMMENTS_LIST_UPDATE_SUCCESS',
             payload: reducerObj
         });
     } catch (error) {
         dispatch({
-            type: 'CITIES_LIST_UPDATE_SUCCESS',
+            type: 'COMMENTS_LIST_UPDATE_SUCCESS',
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message
@@ -72,20 +72,20 @@ export const updateCity = (postObj, reducerObj) => async (dispatch, getState) =>
 
 //Delete
 //to delete order material
-export const deleteCity = (id) => async(dispatch,getState)=>{
+export const deleteComment = (id) => async(dispatch,getState)=>{
     try{
         dispatch({
-            type: 'CITIES_LIST_DELETE_REQUEST'
+            type: 'COMMENTS_LIST_DELETE_REQUEST'
         })
         const token = getState().usersReducer.currentUser;
-        await realestateAPI.delete(`/api/Cities/${id}`,{headers: {Authorization: `Bearer ${token}`}})
+        await realestateAPI.delete(`/api/Comments/${id}`,{headers: {Authorization: `Bearer ${token}`}})
         dispatch({
-            type: 'CITIES_LIST_DELETE_SUCCESS',
+            type: 'COMMENTS_LIST_DELETE_SUCCESS',
             payload: id
         })
     }catch (error) {
         dispatch({
-            type: 'CITIES_LIST_DELETE_FAIL',
+            type: 'COMMENTS_LIST_DELETE_FAIL',
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message
