@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Table, Space, Card, Typography, Col, Row, Popconfirm } from 'antd'
+import { Table, Space, Card, Typography, Col, Row, Popconfirm, Image} from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { Button } from "react-bootstrap";
 import "../../styles/Login.css";
@@ -63,8 +63,8 @@ function CitiesScreen() {
         }))
     }
 
-    const updateRecord = (postObj, reducerObj) => {
-        dispatch(updateCity(postObj, reducerObj))
+    const updateRecord = (postObj) => {
+        dispatch(updateCity(postObj))
         unshowUpdateModal()
     }
 
@@ -111,11 +111,24 @@ function CitiesScreen() {
             )
         },
         {
+            title: 'Image',
+            dataIndex: 'photo',
+            width: '20%',
+            render: (value, record, rowIndex) => {
+                if (value)
+                    return (
+                        <Image src={`data:image/jpeg;base64,${value}`} width={100}/>
+                    )
+                else
+                return (<Image src={'https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132484366.jpg'} width={100}/>)
+            }
+        },
+        {
             title: 'Date',
             dataIndex: 'date',
             width: '20%',
             render: (value, record, rowIndex) => (
-                <p>{value? moment(value).format("YYYY/MM/DD") : ''}</p>
+                <p>{value ? moment(value).format("YYYY/MM/DD") : ''}</p>
             )
         }
     ]

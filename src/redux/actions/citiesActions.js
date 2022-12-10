@@ -22,7 +22,6 @@ export const getCities = () => async(dispatch,getState) =>{
     }
 }
 
-
 export const createCity = (postObject) => async (dispatch, getState) => {
     try {
         dispatch({
@@ -30,7 +29,7 @@ export const createCity = (postObject) => async (dispatch, getState) => {
         });
         //get token from usersReducer
         const token = getState().usersReducer.currentUser;
-        const response = await realestateAPI.post(`/api/Cities`, postObject, { headers: { Authorization: `Bearer ${token}` } })
+        const response = await realestateAPI.post(`/api/Cities/save-file`, postObject, { headers: { Authorization: `Bearer ${token}`,'Content-Type': 'multipart/form-data' } })
         dispatch({
             type: 'CITIES_LIST_CREATE_SUCCESS',
             payload: response.data
@@ -47,17 +46,42 @@ export const createCity = (postObject) => async (dispatch, getState) => {
 }
 
 
-export const updateCity = (postObj, reducerObj) => async (dispatch, getState) => {
+// export const createCity = (postObject) => async (dispatch, getState) => {
+//     try {
+//         dispatch({
+//             type: 'CITIES_LIST_CREATE_REQUEST'
+//         });
+//         //get token from usersReducer
+//         const token = getState().usersReducer.currentUser;
+//         const response = await realestateAPI.post(`/api/Cities`, postObject, { headers: { Authorization: `Bearer ${token}` } })
+//         dispatch({
+//             type: 'CITIES_LIST_CREATE_SUCCESS',
+//             payload: response.data
+//         });
+//     } catch (error) {
+//         dispatch({
+//             type: 'CITIES_LIST_CREATE_FAIL',
+//             payload:
+//                 error.response && error.response.data.message
+//                     ? error.response.data.message
+//                     : error.message,
+//         })
+//     }
+// }
+
+
+export const updateCity = (postObj) => async (dispatch, getState) => {
     try {
         dispatch({
             type: 'CITIES_LIST_UPDATE_REQUEST'
         });
         //get token from usersReducer
         const token = getState().usersReducer.currentUser;
-        await realestateAPI.put(`/api/Cities/${reducerObj.id}`, postObj, { headers: { Authorization: `Bearer ${token}` } })
+        const id = postObj.get('id')
+        const response = await realestateAPI.put(`/api/Cities/${id}`, postObj, { headers: { Authorization: `Bearer ${token}`,'Content-Type': 'multipart/form-data' } })
         dispatch({
             type: 'CITIES_LIST_UPDATE_SUCCESS',
-            payload: reducerObj
+            payload: response.data
         });
     } catch (error) {
         dispatch({

@@ -1,13 +1,13 @@
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Space, Select,Modal } from 'antd';
-import {Form} from 'react-bootstrap'
+import { Space, Select, Modal } from 'antd';
+import { Form } from 'react-bootstrap'
 import Button from "react-bootstrap/Button";
-import {ArrowLeftOutlined} from '@ant-design/icons'
+import { ArrowLeftOutlined } from '@ant-design/icons'
 import moment from 'moment';
-import {getCountries} from '../../redux/actions/countriesActions';
+import { getCountries } from '../../redux/actions/countriesActions';
 
-const {Option} = Select;
+const { Option } = Select;
 
 function AddCityComponent(props) {
     const dispatch = useDispatch();
@@ -16,14 +16,23 @@ function AddCityComponent(props) {
         date: moment().format('YYYY/MM/DD'),
         countryId: 0
     });
+    const [file, setFile] = useState();
     const countriesListReducer = useSelector((state) => state.countriesListReducer);
 
-    const onCancel = () =>{
+    const onCancel = () => {
         props.onClose();
     }
     const saveChanges = () => {
-        const postObj = JSON.parse(JSON.stringify(city));
-        props.save(postObj);
+        // const postObj = JSON.parse(JSON.stringify(city));
+        const formData = new FormData()
+        formData.append("title", city.title)
+        formData.append("date", city.date)
+        formData.append("countryId", city.countryId)
+        formData.append("file", file)
+        for (let [key, value] of formData.entries()) {
+            console.log(`${key}: ${value}`);
+        }
+        props.save(formData);
     }
 
     const onDataChange = (value, inputName) => {
@@ -33,22 +42,26 @@ function AddCityComponent(props) {
         }))
     }
 
+    const changeFile = (e) => {
+        setFile(e.target.files[0]);
+    }
+
     useEffect(() => {
         dispatch(getCountries())
-    },[props])
+    }, [props])
 
     return (
         <Modal
-            onCancel={onCancel}
-            saveChanges={saveChanges}
+            // onCancel={onCancel}
+            // saveChanges={saveChanges}
             okButtonProps={{ disabled: false }}
             cancelButtonProps={{ disabled: false }}
             title={<Space><ArrowLeftOutlined onClick={onCancel} />Add new city</Space>}
             open={props.visible}
             footer={
                 <div>
-                    <Button key="customCancel" onClick={onCancel}>Cancel</Button>
-                    <Button key="customSubmit" form="myForm" onClick={saveChanges} htmlType="submit" type={'primary'}>Add</Button>
+                    {/* <Button key="customCancel" onClick={onCancel}>Cancel</Button> */}
+                    {/* <Button key="customSubmit" form="myForm" onClick={saveChanges} htmlType="submit" type={'primary'}>Add</Button> */}
                 </div>
             }
         >
@@ -57,6 +70,7 @@ function AddCityComponent(props) {
                 <Form.Group controlId='text'>
                     <Form.Label>Title</Form.Label>
                     <Form.Control
+                        required
                         type='text'
                         placeholder='Enter city title'
                         value={city.title}
@@ -76,6 +90,12 @@ function AddCityComponent(props) {
                         return (<Option key={element.id} value={element.id}>{element.title}</Option>)
                     })}
                 </Select>
+                <Form.Group controlId="formFile" className="mb-3">
+                    <Form.Label>Choose File</Form.Label>
+                    <Form.Control type="file" onChange={changeFile} required/>
+                </Form.Group>
+                <Button type="submit">Submit</Button>
+                <Button key="customCancel" onClick={onCancel}>Cancel</Button>
             </Form>
         </Modal>
     )
