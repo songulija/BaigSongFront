@@ -6,10 +6,14 @@ import { LinkContainer } from 'react-router-bootstrap'
 import { Row, Col, NavDropdown, Button, Form } from "react-bootstrap";
 import { DropdownSubmenu, NavDropdownMenu } from "react-bootstrap-submenu";
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../redux/actions/usersActions';
+import { logout } from '../../redux/actions/usersActions';
 import Container from "react-bootstrap/Container";
 import { useNavigate } from 'react-router-dom';
-import './Header.css'
+import styles from "./Header.module.scss";
+import { RiLoginCircleLine, RiLogoutCircleLine } from 'react-icons/ri'
+import { CgProfile } from 'react-icons/cg'
+import { AiOutlineHeart } from 'react-icons/ai'
+import { MdOutlineRealEstateAgent } from 'react-icons/md'
 
 function Header() {
     const dispatch = useDispatch();
@@ -27,9 +31,67 @@ function Header() {
     }
     return (
         <>
-            <Navbar bg="light" expand="lg">
+            <Navbar collapseOnSelect expand="md" className={styles.navcolorr} variant="light">
+                <Container>
+                    <Navbar.Brand href="/">Real Estate</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Collapse id="responsive-navbar-nav">
+                        <Nav className="me-auto">
+                            <Nav.Link href="/">Home</Nav.Link>
+                            <Nav.Link href="/properties">Rent</Nav.Link>
+                            <Nav.Link href="/about">About</Nav.Link>
+                            {currentUser !== null && role === "ADMINISTRATOR" ?
+                                <NavDropdown title="Admin" id="navbarScrollingDropdown">
+                                    <NavDropdown.Item href="/users/admin">Users</NavDropdown.Item>
+                                    <NavDropdown.Item href="/countries/admin">
+                                        Countries
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item href="/cities/admin">
+                                        Cities
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item href="/property-types/admin">
+                                        Property Types
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item href="/properties/admin">
+                                        Properties
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item href="/comments/admin">
+                                        Comments
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item href="/favourite-properties/admin">
+                                        Favourite Properties
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item href="/journals/admin">
+                                        Journals
+                                    </NavDropdown.Item>
+                                </NavDropdown> :
+                                <div></div>
+                            }
+                        </Nav>
+                        <Nav>
+                            {/* <Nav.Link href="#deets">More deets</Nav.Link>
+                            <Nav.Link eventKey={2} href="#memes">
+                                Dank memes
+                            </Nav.Link> */}
+                            <a href='/user/properties'><MdOutlineRealEstateAgent title='My Properties' size={40} style={{ padding: 5, cursor: 'pointer', color: 'black' }} /></a>
+                            <a href='/favourite-properties'><AiOutlineHeart title='Favourite properties' size={40} style={{ padding: 5, cursor: 'pointer', color: 'black' }} /></a>
+                            {currentUser ?
+                                <div>
+                                    <a href='/profile'><CgProfile title='Profile' size={40} style={{ padding: 5, cursor: 'pointer', color: 'black' }} /></a>
+                                    <RiLogoutCircleLine title='Logout' size={40} onClick={logoutHandler} style={{ padding: 5, cursor: 'pointer', color: 'black' }} />
+                                </div>
+                                :
+                                <a href='/login'><RiLoginCircleLine title='Login' size={40} style={{ padding: 5, cursor: 'pointer', color: 'black' }} /></a>
+                            }
+
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+            {/* <Navbar bg="light" expand="lg">
                 <Container fluid>
-                    <Navbar.Brand href="#">Real Estate</Navbar.Brand>
+                    <Navbar.Brand href="/">Real Estate</Navbar.Brand>
                     <Navbar.Toggle aria-controls="navbarScroll" />
                     <Navbar.Collapse id="navbarScroll">
                         <Nav
@@ -74,7 +136,7 @@ function Header() {
                                 <div></div>
                             }
                         </Nav>
-                        {/* <Form classNameName="d-flex">
+                        <Form classNameName="d-flex">
                             <Form.Control
                                 type="search"
                                 placeholder="Search"
@@ -82,7 +144,7 @@ function Header() {
                                 aria-label="Search"
                             />
                             <Button variant="outline-success">Search</Button>
-                        </Form> */}
+                        </Form>
                         <div style={{padding: 5}}></div>
                         {currentUser ?
                             <Button variant="outline-secondary" onClick={logoutHandler}>Logout</Button>
@@ -91,39 +153,7 @@ function Header() {
                         }
                     </Navbar.Collapse>
                 </Container>
-            </Navbar>
-            {/* <div className="container">
-                <header className="blog-header lh-1 py-3">
-                    <div className="row flex-nowrap justify-content-between align-items-center">
-                        <div className="col-4 pt-1">
-                            <a className="link-secondary" href="/">Subscribe</a>
-                        </div>
-                        <div className="col-4 text-center">
-                            <a className="blog-header-logo text-dark" href="/">Real Estate</a>
-                        </div>
-                        <div className="col-4 d-flex justify-content-end align-items-center">
-                            <a className="link-secondary" href="#" aria-label="Search">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="mx-3" role="img" viewBox="0 0 24 24"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"></circle><path d="M21 21l-5.2-5.2"></path></svg>
-                            </a>
-                            {currentUser ?
-                                <a className="btn btn-sm btn-outline-secondary" onClick={logoutHandler}>Logout</a>
-                                :
-                                <a className="btn btn-sm btn-outline-secondary" href="/login">Sign in</a>
-                            }
-                        </div>
-                    </div>
-                </header>
-
-                <div className="nav-scroller py-1 mb-2">
-                    <nav className="nav d-flex justify-content-between">
-                        <a className="p-2 link-secondary" href="#">Main</a>
-                        <a className="p-2 link-secondary" href="#">About Us</a>
-                        <a className="p-2 link-secondary" href="#">Services</a>
-                        <a className="p-2 link-secondary" href="#">Properties</a>
-                    </nav>
-                </div>
-            </div> */}
-
+            </Navbar> */}
         </>
     )
 

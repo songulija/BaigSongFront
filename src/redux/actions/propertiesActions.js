@@ -118,7 +118,30 @@ export const getPropertyById = (id) => async (dispatch, getState) => {
     }
 }
 
-export const addProperty = (postObject) => async (dispatch, getState) => {
+export const getTopLikedProperties = () => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: 'TOP_LIKED_PROPERTIES_FETCH_REQUEST'
+        });
+        //getting token from usersReducer state
+        const token = getState().usersReducer.currentUser;
+        const response = await realestateAPI.get(`/api/Properties/most-liked-properties`, { headers: { Authorization: `Bearer ${token}` } })
+        dispatch({
+            type: 'TOP_LIKED_PROPERTIES_FETCH_SUCCESS',
+            payload: response.data
+        });
+    } catch (error) {
+        dispatch({
+            type: 'TOP_LIKED_PROPERTIES_FETCH_FAIL',
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        })
+    }
+}
+
+export const createProperty = (postObject) => async (dispatch, getState) => {
     try {
         dispatch({
             type: 'PROPERTIES_CREATE_REQUEST'
@@ -142,7 +165,7 @@ export const addProperty = (postObject) => async (dispatch, getState) => {
 }
 
 
-export const updatePropertyType = (postObj, reducerObj) => async (dispatch, getState) => {
+export const updateProperty = (postObj, reducerObj) => async (dispatch, getState) => {
     try {
         dispatch({
             type: 'PROPERTIES_UPDATE_REQUEST'
@@ -164,3 +187,26 @@ export const updatePropertyType = (postObj, reducerObj) => async (dispatch, getS
         })
     }
 }
+
+export const deleteProperty = (id) => async(dispatch,getState)=>{
+    try{
+        dispatch({
+            type: 'PROPERTIES_DELETE_REQUEST'
+        })
+        const token = getState().usersReducer.currentUser;
+        await realestateAPI.delete(`/api/PropertyTypes/${id}`,{headers: {Authorization: `Bearer ${token}`}})
+        dispatch({
+            type: 'PROPERTIES_DELETE_SUCCESS',
+            payload: id
+        })
+    }catch (error) {
+        dispatch({
+            type: 'PROPERTIES_DELETE_FAIL',
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        })
+    }
+}
+

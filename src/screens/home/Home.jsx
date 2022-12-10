@@ -1,7 +1,7 @@
 import { Container } from "react-bootstrap";
 import Footer from "../../components/Footer";
 // import Header from "../../components/header/Header";
-import Header from '../../components/Header'
+import Header from '../../components/header/Header'
 import MailList from "../../components/MailList";
 import PropertyList from "../../components/PropertyList";
 import "./home.css";

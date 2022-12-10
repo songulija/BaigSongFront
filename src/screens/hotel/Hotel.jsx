@@ -1,7 +1,5 @@
 import "./hotel.css";
-import Header from "../../components/notused/header/Header";
 import MailList from "../../components/MailList";
-import Footer from "../../components/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleArrowLeft,
@@ -135,7 +133,6 @@ const Hotel = () => {
           </div>
         </div>
         <MailList />
-        <Footer />
       </div>
     </div>
   );

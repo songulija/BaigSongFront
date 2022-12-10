@@ -1,4 +1,4 @@
-export const propertiesReducer = (state = { properties: [], property: {} }, action) => {
+export const propertiesReducer = (state = { properties: [], property: {}, top_liked_properties: [] }, action) => {
     switch (action.type) {
         case 'PROPERTIES_FETCH_REQUEST':
             return { ...state, loading: true }
@@ -30,6 +30,12 @@ export const propertiesReducer = (state = { properties: [], property: {} }, acti
             return { ...state, loading: false, property: action.payload }
         case 'PROPERTY_BY_ID_FETCH_FAIL':
             return { ...state, loading: false, error: action.payload }
+        case 'TOP_LIKED_PROPERTIES_FETCH_REQUEST':
+            return { ...state, loading: true }
+        case 'TOP_LIKED_PROPERTIES_FETCH_SUCCESS':
+            return { ...state, loading: false, top_liked_properties: action.payload }
+        case 'TOP_LIKED_PROPERTIES_FETCH_FAIL':
+            return { ...state, loading: false, error: action.payload }
         case 'PROPERTIES_CREATE_REQUEST':
             return { ...state, loading: true }
         case 'PROPERTIES_CREATE_SUCCESS':
@@ -44,6 +50,13 @@ export const propertiesReducer = (state = { properties: [], property: {} }, acti
             const updated_properties = properties_clone.map(x => x.id === action.payload.id?action.payload:x)
             return { ...state, loading: false, properties: updated_properties }
         case 'PROPERTIES_UPDATE_FAIL':
+            return { ...state, loading: false, error: action.payload }
+        case 'PROPERTIES_DELETE_REQUEST':
+            return { ...state, loading: true }
+        case 'PROPERTIES_DELETE_SUCCESS':
+            const _properties = state.properties.filter(x => x.id !== action.payload);
+            return { ...state, properties: _properties };
+        case 'PROPERTIES_DELETE_FAIL':
             return { ...state, loading: false, error: action.payload }
         default:
             return state;
