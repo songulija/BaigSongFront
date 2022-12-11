@@ -92,7 +92,7 @@ function AddCityComponent(props) {
                 </Select>
                 <Form.Group controlId="formFile" className="mb-3">
                     <Form.Label>Choose File</Form.Label>
-                    <Form.Control type="file" onChange={changeFile} required/>
+                    <Form.Control required type="file" onChange={changeFile} />
                 </Form.Group>
                 <Button type="submit">Submit</Button>
                 <Button key="customCancel" onClick={onCancel}>Cancel</Button>

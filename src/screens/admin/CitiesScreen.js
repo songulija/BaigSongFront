@@ -104,7 +104,7 @@ function CitiesScreen() {
         },
         {
             title: 'Country',
-            dataIndex: 'Country',
+            dataIndex: 'country',
             width: '20%',
             render: (value, record, rowIndex) => (
                 <p>{record !== null ? record.country.title : ''}</p>

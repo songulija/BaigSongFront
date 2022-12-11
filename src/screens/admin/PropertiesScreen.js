@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Table, Space, Card, Typography, Col, Row, Popconfirm } from 'antd'
+import { Table, Space, Card, Typography, Col, Row, Popconfirm, Image } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { Button } from "react-bootstrap";
 import "../../styles/Login.css";
@@ -8,6 +8,8 @@ import { tableCardStyle, tableCardBodyStyle, buttonStyle } from '../../styles/cu
 import { getProperties, createProperty, updateProperty, deleteProperty } from '../../redux/actions/propertiesActions'
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment';
+import AddPropertyComponent from '../../components/propertiesComponents/AddPropertyComponent';
+import UpdatePropertyComponent from '../../components/propertiesComponents/UpdatePropertyComponent';
 
 const aboutTitleTextStyle = {
     fontStyle: 'normal',
@@ -91,6 +93,19 @@ function PropertiesScreen() {
                     <Button type="primary" danger>Delete</Button>
                 </Popconfirm>
             )
+        },
+        {
+            title: 'Image',
+            dataIndex: 'photo',
+            width: '20%',
+            render: (value, record, rowIndex) => {
+                if (value)
+                    return (
+                        <Image src={`data:image/jpeg;base64,${value}`} width={100}/>
+                    )
+                else
+                return (<Image src={'https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132484366.jpg'} width={100}/>)
+            }
         },
         {
             title: 'Email',
@@ -192,11 +207,11 @@ function PropertiesScreen() {
                 </Col>
             </div>
             {addPanel !== false ?
-                <AddCommentComponent visible={addPanel} onClose={unshowAddPanel}
+                <AddPropertyComponent visible={addPanel} onClose={unshowAddPanel}
                     save={addNewRecord} />
                 : null}
             {updatePanel.visibility !== false ?
-                <UpdateCommentComponent visible={updatePanel.visibility} save={updateRecord}
+                <UpdatePropertyComponent visible={updatePanel.visibility} save={updateRecord}
                     onClose={unshowUpdateModal} record={updatePanel.record} />
                 : null}
         </>

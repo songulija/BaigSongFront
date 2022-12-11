@@ -29,7 +29,7 @@ export const createCity = (postObject) => async (dispatch, getState) => {
         });
         //get token from usersReducer
         const token = getState().usersReducer.currentUser;
-        const response = await realestateAPI.post(`/api/Cities/save-file`, postObject, { headers: { Authorization: `Bearer ${token}`,'Content-Type': 'multipart/form-data' } })
+        const response = await realestateAPI.post(`/api/Cities`, postObject, { headers: { Authorization: `Bearer ${token}`,'Content-Type': 'multipart/form-data' } })
         dispatch({
             type: 'CITIES_LIST_CREATE_SUCCESS',
             payload: response.data
@@ -77,6 +77,7 @@ export const updateCity = (postObj) => async (dispatch, getState) => {
         });
         //get token from usersReducer
         const token = getState().usersReducer.currentUser;
+        //get id from form data
         const id = postObj.get('id')
         const response = await realestateAPI.put(`/api/Cities/${id}`, postObj, { headers: { Authorization: `Bearer ${token}`,'Content-Type': 'multipart/form-data' } })
         dispatch({

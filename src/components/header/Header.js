@@ -38,8 +38,9 @@ function Header() {
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
                             <Nav.Link href="/">Home</Nav.Link>
-                            <Nav.Link href="/properties">Rent</Nav.Link>
                             <Nav.Link href="/about">About</Nav.Link>
+                            <Nav.Link href="/properties">Rent</Nav.Link>
+                            <Nav.Link href="/contact">Contact</Nav.Link>
                             {currentUser !== null && role === "ADMINISTRATOR" ?
                                 <NavDropdown title="Admin" id="navbarScrollingDropdown">
                                     <NavDropdown.Item href="/users/admin">Users</NavDropdown.Item>
@@ -58,13 +59,13 @@ function Header() {
                                     <NavDropdown.Item href="/comments/admin">
                                         Comments
                                     </NavDropdown.Item>
-                                    <NavDropdown.Item href="/favourite-properties/admin">
+                                    {/* <NavDropdown.Item href="/favourite-properties/admin">
                                         Favourite Properties
                                     </NavDropdown.Item>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item href="/journals/admin">
                                         Journals
-                                    </NavDropdown.Item>
+                                    </NavDropdown.Item> */}
                                 </NavDropdown> :
                                 <div></div>
                             }

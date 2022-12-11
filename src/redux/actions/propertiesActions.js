@@ -148,7 +148,7 @@ export const createProperty = (postObject) => async (dispatch, getState) => {
         });
         //get token from usersReducer
         const token = getState().usersReducer.currentUser;
-        const response = await realestateAPI.post(`/api/Properties`, postObject, { headers: { Authorization: `Bearer ${token}` } })
+        const response = await realestateAPI.post(`/api/Properties`, postObject, { headers: { Authorization: `Bearer ${token}`,'Content-Type': 'multipart/form-data' } })
         dispatch({
             type: 'PROPERTIES_CREATE_SUCCESS',
             payload: response.data
@@ -165,17 +165,19 @@ export const createProperty = (postObject) => async (dispatch, getState) => {
 }
 
 
-export const updateProperty = (postObj, reducerObj) => async (dispatch, getState) => {
+export const updateProperty = (postObj) => async (dispatch, getState) => {
     try {
         dispatch({
             type: 'PROPERTIES_UPDATE_REQUEST'
         });
         //get token from usersReducer
         const token = getState().usersReducer.currentUser;
-        await realestateAPI.put(`/api/Properties/${reducerObj.id}`, postObj, { headers: { Authorization: `Bearer ${token}` } })
+        //get id from form data
+        const id = postObj.get('id')
+        const response = await realestateAPI.put(`/api/Properties/${id}`, postObj, { headers: { Authorization: `Bearer ${token}`,'Content-Type': 'multipart/form-data' } })
         dispatch({
             type: 'PROPERTIES_UPDATE_SUCCESS',
-            payload: reducerObj
+            payload: response.data
         });
     } catch (error) {
         dispatch({

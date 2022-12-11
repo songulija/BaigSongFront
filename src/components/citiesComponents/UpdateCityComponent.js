@@ -22,7 +22,7 @@ function UpdateCityComponent(props) {
     const dispatch = useDispatch()
     const [city, setCity] = useState({});
     const [file, setFile] = useState();
-    const [fileChanged, setFileChanged] = useState(0)
+    // const [fileChanged, setFileChanged] = useState(0)
     const countriesListReducer = useSelector((state) => state.countriesListReducer);
 
     const onBack = () => {
@@ -58,7 +58,8 @@ function UpdateCityComponent(props) {
         }))
     }
     const changeFile = (e) => {
-        setFileChanged(1);
+        // setFileChanged(1);
+        deleteImage()
         setFile(e.target.files[0])
     }
     useEffect(() => {
@@ -104,7 +105,7 @@ function UpdateCityComponent(props) {
                             placeholder="Select Country"
                             defaultValue={city.countryId}
                             value={city.countryId}
-                            onChange={(e) => onDataChange(e, "countryId")}
+                            onChange={(e) => onDataChange(e.target.value, "countryId")}
                         >
                             {countriesListReducer.countries.map((element) => {
                                 return (<option key={element.id} value={element.id}>{element.title}</option>)
@@ -125,10 +126,10 @@ function UpdateCityComponent(props) {
                     </Select> */}
                     {city.photo ?
                         <div>
-                            <p style={{ ...textStyle }}>Nuotrauka</p>
+                            <p style={{ ...textStyle }}>Photo</p>
                             <Image src={`data:image/jpeg;base64,${city.photo}`} width={100} />
                             <br></br>
-                            <Button onClick={deleteImage}>Ištrinti nuotrauką</Button>
+                            <Button onClick={deleteImage}>Delete photo</Button>
                         </div> :
                         <div>
                         <Form.Group controlId="formFile" className="mb-3">
