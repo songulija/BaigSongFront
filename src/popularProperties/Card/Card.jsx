@@ -70,6 +70,7 @@ const Card = (props) => {
             variant="top"
             alt={property.title}
             data-holder-rendered="true"
+            width={'100%'}
             // height={100}
             // width={100}
           />
@@ -79,7 +80,7 @@ const Card = (props) => {
             variant="top"
             alt={property.title}
             data-holder-rendered="true"
-            // height={100}
+            width={'100%'}
             // width={100}
           />
         }

@@ -62,7 +62,7 @@ const PropertyCard = (props) => {
           alt={property.title}
           data-holder-rendered="true"
           height={200}
-          width={273}
+          width={'100%'}
         />
         :
         <Image
@@ -71,7 +71,7 @@ const PropertyCard = (props) => {
           alt={property.title}
           data-holder-rendered="true"
           height={200}
-          width={273}
+          width={'100%'}
         />
       }
       <Card.Body>
