@@ -3,8 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Container } from 'react-bootstrap'
 // import Home from "./screens/home/Home";
 import Home from "./screens/Home";
-import Hotel from "./screens/hotel/Hotel";
-import List from "./screens/list/List";
+// import List from "./screens/list/List";
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import UsersScreen from './screens/admin/UsersScreen';
@@ -21,6 +20,7 @@ import AdminPropertiesScreen from './screens/admin/AdminPropertiesScreen';
 import AboutUsScreen from './screens/AboutUsScreen';
 import ContactUsScreen from './screens/ContactUsScreen';
 import PropertiesScreen from './screens/PropertiesScreen';
+import PropertyScreen from './screens/property/PropertyScreen';
 
 function App() {
   return (//have to wrap entire App in Router in order to use it
@@ -41,7 +41,7 @@ function App() {
               <Route path="/about" element={<AboutUsScreen />} />
               <Route path="/contact" element={<ContactUsScreen />} />
               <Route path="/properties" element={<PropertiesScreen />} />
-              <Route path="/properties/:id" element={<Hotel/>}/>
+              <Route path="/properties/:id" element={<PropertyScreen/>}/>
 
               {/* Logged user Favourite Properties, Create Property, Check Your Properties, (liked properties), Comments, ProfileScreen,  */}
 

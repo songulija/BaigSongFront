@@ -38,6 +38,7 @@ export const login = (email, password, callback) => async (dispatch) => {
                 expires: inFifteenMinutes
             });
         }
+        console.log(userData['http://schemas.xmlsoap.org/ws/2008/06/identity/claims/emailaddress'])
 
         callback();
     } catch (error) {//if something fails then dispatch action with type/name PRODUCT_DETAILS_FAIL and pass error data as payload

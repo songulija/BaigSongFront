@@ -3,10 +3,8 @@ import { useState, useEffect } from "react";
 //react icons
 import { BsFillDoorOpenFill } from "react-icons/bs";
 import { IoIosBed } from "react-icons/io";
-import { IoLocationSharp } from "react-icons/io5";
-import { FaBath } from "react-icons/fa";
-import building3 from "../../../assets/building3.jpg";
 import { Link } from "react-router-dom";
+import { Image } from "antd";
 
 const Card = (props) => {
   const [property, setProperty] = useState({
@@ -54,12 +52,6 @@ const Card = (props) => {
     return price;
   };
 
-  //CONVERT RENT FUNC
-  const covnertRent = (rent) => {
-    if (rent >= 1000) return `${rent / 1000}k `;
-    return rent;
-  };
-
   useEffect(() => {
     if (props.record)
       setProperty(props.record)
@@ -72,7 +64,25 @@ const Card = (props) => {
         <div className={styles.image_buy_btn}>
           <Link to="/">Rent</Link>
         </div>
-        <img src={property.images.length? property.images[0]: 'https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-apartments_300/9f60235dc09a3ac3f0a93adbc901c61ecd1ce72e.jpg'} alt="building" />
+        {property.photo ?
+          <Image
+            src={`data:image/jpeg;base64,${property.photo}`}
+            variant="top"
+            alt={property.title}
+            data-holder-rendered="true"
+            // height={100}
+            // width={100}
+          />
+          :
+          <Image
+            src={'https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132484366.jpg'}
+            variant="top"
+            alt={property.title}
+            data-holder-rendered="true"
+            // height={100}
+            // width={100}
+          />
+        }
         {/* CITY */}
         <h3>{property.city.title}</h3>
         <h4>

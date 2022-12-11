@@ -1,14 +1,13 @@
 import styles from "./Card.module.scss";
 import { useState, useEffect } from "react";
 //react icons
-import { BsFillDoorOpenFill } from "react-icons/bs";
-import { IoIosBed } from "react-icons/io";
 import { GrLocation } from "react-icons/gr";
 import { MdMeetingRoom } from "react-icons/md";
 import { MdOutlineEuroSymbol } from "react-icons/md";
 // import building3 from "../../../assets/building3.jpg";
 import { Link } from "react-router-dom";
 import { Button, Card, Col, ListGroup, Row } from 'react-bootstrap'
+import { Image } from "antd";
 
 const PropertyCard = (props) => {
   const [property, setProperty] = useState({
@@ -48,31 +47,33 @@ const PropertyCard = (props) => {
     "price": 369,
     "date": "2022-12-09T22:13:10.2197933"
   })
-  //CONVERT PRICE FUNC
-  const convertPrice = (price) => {
-    if (price >= 1000 && price < 999999) return `${price / 1000}k `;
-    if (price >= 1000000) return `${price / 1000000}m `;
-    return price;
-  };
-
-  //CONVERT RENT FUNC
-  const covnertRent = (rent) => {
-    if (rent >= 1000) return `${rent / 1000}k `;
-    return rent;
-  };
-
+  
   useEffect(() => {
     if (props.record)
       setProperty(props.record)
   }, [props])
 
   return (
-    <Card >
-      <Card.Img
-        variant="top"
-        src={'https://cf.bstatic.com/static/img/theme-index/carousel_320x240/card-image-apartments_300/9f60235dc09a3ac3f0a93adbc901c61ecd1ce72e.jpg'}
-        alt="building"
-        data-holder-rendered="true" />
+    <Card>
+      {property.photo ?
+        <Image
+          src={`data:image/jpeg;base64,${property.photo}`}
+          variant="top"
+          alt={property.title}
+          data-holder-rendered="true"
+          height={200}
+          width={273}
+        />
+        :
+        <Image
+          src={'https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132484366.jpg'}
+          variant="top"
+          alt={property.title}
+          data-holder-rendered="true"
+          height={200}
+          width={273}
+        />
+      }
       <Card.Body>
         <Card.Title>{property.title}</Card.Title>
         <Card.Text>
@@ -89,7 +90,7 @@ const PropertyCard = (props) => {
             Price: {property.price} <MdOutlineEuroSymbol size={20} />
           </Card.Text>
         </div>
-        <Button variant="dark" href={`/property/${property.id}`}>Detailed?</Button>
+        <Button variant="dark" href={`/properties/${property.id}`}>Detailed?</Button>
       </Card.Body>
     </Card>
   );

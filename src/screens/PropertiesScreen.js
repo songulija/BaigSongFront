@@ -1,4 +1,4 @@
-import PropertiesList from "../components/propertiesList/PropertiesList";
+import PropertiesListComponent from "../components/propertiesList/PropertiesListComponent";
 import PropertiesSection1 from "../components/homeComponents/Sections/PropertiesSection1";
 // import Footer from "../components/footer/Footer";
 
@@ -6,7 +6,7 @@ const PropertiesScreen = () => {
   return (
     <main>
       <PropertiesSection1 />
-      <PropertiesList />
+      <PropertiesListComponent />
       {/* <Footer /> */}
     </main>
   );

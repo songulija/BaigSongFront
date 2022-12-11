@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTopLikedProperties } from '../../../redux/actions/propertiesActions'
-import styles from "./Section3.module.scss";
-import { ArrowButton } from "../buttons/Buttons";
-import Carousel from "../Carousel/Carousel";
+import { getTopLikedProperties } from '../redux/actions/propertiesActions'
+import styles from "./PopularPropertiesComponent.module.scss";
+import { ArrowButton } from "../components/homeComponents/buttons/Buttons";
+import Carousel from "./Carousel/Carousel";
 import { SwiperSlide } from "swiper/react";
-import Card from "../Card/Card";
+import Card from "./Card/Card";
 
-const Section3 = () => {
+const Section3 = ({title}) => {
   const dispatch = useDispatch()
   const propertiesReducer = useSelector((state) => state.propertiesReducer)
   const { top_liked_properties } = propertiesReducer;
@@ -17,7 +17,7 @@ const Section3 = () => {
   return (
     <section className={styles.section_3}>
       <div className={styles.section_3_title}>
-        <h1>Best Houses</h1>
+        <h1>{title}</h1>
         <ArrowButton text="See More" path="buy" />
       </div>
 

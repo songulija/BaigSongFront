@@ -1,6 +1,6 @@
 import Section1 from "../components/homeComponents/Sections/Section1";
 import Section2 from "../components/homeComponents/Sections/Section2";
-import Section3 from "../components/homeComponents/Sections/Section3";
+import PopularPropertiesComponent from "../popularProperties/PopularPropertiesComponent";
 import Section4 from "../components/homeComponents/Sections/Section4";
 import Section5 from "../components/homeComponents/Sections/Section5";
 // import Footer from "../components/footer/Footer";
@@ -10,7 +10,7 @@ const Home = () => {
     <main>
       <Section1 />
       <Section2 />
-      <Section3 />
+      <PopularPropertiesComponent title={'Popular Properties'} />
       <Section4 />
       <Section5 />
       {/* <Footer /> */}
