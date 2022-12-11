@@ -125,27 +125,4 @@ const Card = (props) => {
   );
 };
 
-//default Props
-// Card.defaultProps = {
-//   info: {
-//     id: undefined,
-//     imageSource: building3,
-//     category: "Buy",
-//     city: "City",
-//     neighbourhood: "Neighbourhood",
-//     street: "Street",
-//     rooms: 9,
-//     bedrooms: 7,
-//     bathrooms: 2,
-//     shortAndress: "DA",
-//     price: 80000,
-//     rent: 0,
-//   },
-//   showInfo: {
-//     price: true,
-//     rent: false,
-//   },
-//   secondClass: "undefined",
-// };
-
 export default Card;

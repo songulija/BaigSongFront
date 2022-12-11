@@ -26,7 +26,7 @@ const textStyle = {
     lineHeight: '22px',
     marginRight: '40px',
 }
-function PropertiesScreen() {
+function AdminPropertiesScreen() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -219,4 +219,4 @@ function PropertiesScreen() {
 }
 
 //connect to redux states, defining all action that we will use
-export default PropertiesScreen
+export default AdminPropertiesScreen

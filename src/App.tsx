@@ -17,9 +17,10 @@ import CitiesScreen from './screens/admin/CitiesScreen';
 import PropertyTypesScreen from './screens/admin/PropertyTypesScreen';
 import CommentsScreen from './screens/admin/CommentsScreen';
 import "./App.scss";
-import PropertiesScreen from './screens/admin/PropertiesScreen';
+import AdminPropertiesScreen from './screens/admin/AdminPropertiesScreen';
 import AboutUsScreen from './screens/AboutUsScreen';
 import ContactUsScreen from './screens/ContactUsScreen';
+import PropertiesScreen from './screens/PropertiesScreen';
 
 function App() {
   return (//have to wrap entire App in Router in order to use it
@@ -39,9 +40,8 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<AboutUsScreen />} />
               <Route path="/contact" element={<ContactUsScreen />} />
-              <Route path="/hotels" element={<List />} />
-              <Route path="/hotels/:id" element={<Hotel />} />
-
+              <Route path="/properties" element={<PropertiesScreen />} />
+              <Route path="/properties/:id" element={<Hotel/>}/>
 
               {/* Logged user Favourite Properties, Create Property, Check Your Properties, (liked properties), Comments, ProfileScreen,  */}
 
@@ -51,7 +51,7 @@ function App() {
               <Route path="/cities/admin" element={<CitiesScreen />} />
               <Route path="/property-types/admin" element={<PropertyTypesScreen />} />
               <Route path="/comments/admin" element={<CommentsScreen />} />
-              <Route path="/properties/admin" element={<PropertiesScreen />} />
+              <Route path="/properties/admin" element={<AdminPropertiesScreen />} />
             </Routes>
              {/* <Footer /> */}
           </Container>

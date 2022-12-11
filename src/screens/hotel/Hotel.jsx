@@ -1,5 +1,8 @@
 import "./hotel.css";
-import MailList from "../../components/MailList";
+// import Navbar from "../../components/navbar/Navbar";
+// import Header from "../../components/header/Header";
+// import MailList from "../../components/mailList/MailList";
+// import Footer from "../../components/footer/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleArrowLeft,
@@ -53,7 +56,8 @@ const Hotel = () => {
 
   return (
     <div>
-      {/* <Header type="list" /> */}
+      {/* <Navbar />
+      <Header type="list" /> */}
       <div className="hotelContainer">
         {open && (
           <div className="slider">
@@ -132,7 +136,8 @@ const Hotel = () => {
             </div>
           </div>
         </div>
-        <MailList />
+        {/* <MailList />
+        <Footer /> */}
       </div>
     </div>
   );
