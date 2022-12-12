@@ -6,7 +6,7 @@ import { GrLocation } from "react-icons/gr";
 import { MdOutlineEuroSymbol, MdApartment, MdMeetingRoom } from "react-icons/md";
 import { BiBuildingHouse } from "react-icons/bi";
 import { getPropertyById } from '../../redux/actions/propertiesActions'
-import { createComment } from "../../redux/actions/commentsActions";
+import { createComment } from "../../redux/actions/propertiesActions";
 import PopularPropertiesComponent from "../../popularProperties/PopularPropertiesComponent";
 import { Button, Col, Row } from "react-bootstrap";
 import { Image } from "antd";

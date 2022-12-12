@@ -43,6 +43,15 @@ export const propertiesReducer = (state = { properties: [], property: {}, top_li
             return { ...state, loading: false, properties: newProperties }
         case 'PROPERTIES_CREATE_FAIL':
             return { ...state, loading: false, error: action.payload }
+        case 'PROPERTY_COMMENTS_CREATE_REQUEST':
+            return { ...state, loading: true }
+        case 'PROPERTY_COMMENTS_CREATE_SUCCESS':
+            // ...item, obj: [...item.obj, output]
+            const newPropertyComment = {...state.property, comments: [...state.property.comments, {...action.payload}]}
+            console.log(newPropertyComment)
+            return { ...state, loading: false, property: newPropertyComment}
+        case 'PROPERTY_COMMENTS_CREATE_FAIL':
+            return { ...state, loading: false, error: action.payload }
         case 'PROPERTIES_UPDATE_REQUEST':
             return { ...state, loading: true }
         case 'PROPERTIES_UPDATE_SUCCESS':

@@ -164,6 +164,29 @@ export const createProperty = (postObject) => async (dispatch, getState) => {
     }
 }
 
+export const createComment = (postObject) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: 'PROPERTY_COMMENTS_CREATE_REQUEST'
+        });
+        //get token from usersReducer
+        const token = getState().usersReducer.currentUser;
+        const response = await realestateAPI.post(`/api/Comments`, postObject, { headers: { Authorization: `Bearer ${token}` } })
+        dispatch({
+            type: 'PROPERTY_COMMENTS_CREATE_SUCCESS',
+            payload: response.data
+        });
+    } catch (error) {
+        dispatch({
+            type: 'PROPERTY_COMMENTS_CREATE_FAIL',
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        })
+    }
+}
+
 
 export const updateProperty = (postObj) => async (dispatch, getState) => {
     try {
