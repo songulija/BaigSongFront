@@ -97,7 +97,7 @@ function UpdatePropertyComponent(props) {
             >
                 <Form layout="vertical" id="myForm" name="myForm" onSubmit={saveChanges}>
                     <h1 className="h3 mb-3 fw-normal">Property update</h1>
-                    <Form.Group className="mb-3">
+                    {/* <Form.Group className="mb-3">
                         <Form.Label>User</Form.Label>
                         <Form.Select
                             required
@@ -111,7 +111,7 @@ function UpdatePropertyComponent(props) {
                                 return (<option key={element.id} value={element.id}>{element.email}</option>)
                             })}
                         </Form.Select>
-                    </Form.Group>
+                    </Form.Group> */}
 
                     <Form.Group className="mb-3">
                         <Form.Label>Property Type</Form.Label>

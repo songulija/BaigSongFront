@@ -14,7 +14,7 @@ const { Option } = Select;
 function AddPropertyComponent(props) {
     const dispatch = useDispatch();
     const [property, setProperty] = useState({
-        userId: 1,
+        userId: 0,
         propertyTypeId: 2,
         rentTypeId: 1,
         cityId: 1,
@@ -86,7 +86,7 @@ function AddPropertyComponent(props) {
         >
             <Form onSubmit={saveChanges}>
                 <h1 className="h3 mb-3 fw-normal">Property creation</h1>
-                <Form.Group className="mb-3">
+                {/* <Form.Group className="mb-3">
                     <Form.Label>User</Form.Label>
                     <Form.Select
                         required
@@ -100,7 +100,7 @@ function AddPropertyComponent(props) {
                             return (<option key={element.id} value={element.id}>{element.email}</option>)
                         })}
                     </Form.Select>
-                </Form.Group>
+                </Form.Group> */}
 
                 <Form.Group className="mb-3">
                     <Form.Label>Property Type</Form.Label>

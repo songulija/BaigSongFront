@@ -222,7 +222,7 @@ export const deleteProperty = (id) => async(dispatch,getState)=>{
             type: 'PROPERTIES_DELETE_REQUEST'
         })
         const token = getState().usersReducer.currentUser;
-        await realestateAPI.delete(`/api/PropertyTypes/${id}`,{headers: {Authorization: `Bearer ${token}`}})
+        await realestateAPI.delete(`/api/Properties/${id}`,{headers: {Authorization: `Bearer ${token}`}})
         dispatch({
             type: 'PROPERTIES_DELETE_SUCCESS',
             payload: id

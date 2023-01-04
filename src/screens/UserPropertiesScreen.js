@@ -81,9 +81,6 @@ function UserPropertiesScreen() {
     }
 
     const onShowSizeChange = (data) => {
-        console.log('veiki')
-        console.log(data)
-        // console.log(current, pageSize);
         navigate(`/user/properties/${data}`)
     };
 
@@ -177,7 +174,7 @@ function UserPropertiesScreen() {
 
     useEffect(() => {
         if (currentUser !== null) {
-            dispatch(getPropertiesByUserId(2, pageNumber))
+            dispatch(getPropertiesByUserId(10, pageNumber))
         } else {
             navigate('/')
         }
@@ -185,6 +182,7 @@ function UserPropertiesScreen() {
     return (
         <>
             {properties ? <Row>
+                <Button size="large" style={{ marginBottom: '4px' }} onClick={showAddPanel}><PlusOutlined />Add Property</Button>
                 {properties.map((property, i) => (
                     <Col xl={22} style={{ marginBottom: 20 }}>
                         <MyPropertyCard record={property} />
@@ -210,9 +208,10 @@ function UserPropertiesScreen() {
             {pagination ?
                 <Pagination
                     onChange={onShowSizeChange}
+                    pageSize={10}
                     current={pagination.currentPage}
                     total={pagination.totalCount}
-                    pageSize={10} />
+                />
                 :
                 <div></div>}
 
@@ -250,10 +249,10 @@ function UserPropertiesScreen() {
                 <AddPropertyComponent visible={addPanel} onClose={unshowAddPanel}
                     save={addNewRecord} />
                 : null}
-            {updatePanel.visibility !== false ?
+            {/* {updatePanel.visibility !== false ?
                 <UpdatePropertyComponent visible={updatePanel.visibility} save={updateRecord}
                     onClose={unshowUpdateModal} record={updatePanel.record} />
-                : null}
+                : null} */}
         </>
     )
 }
