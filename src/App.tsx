@@ -22,6 +22,7 @@ import ContactUsScreen from './screens/ContactUsScreen';
 import PropertiesScreen from './screens/PropertiesScreen';
 import PropertyScreen from './screens/property/PropertyScreen';
 import UserPropertiesScreen from './screens/UserPropertiesScreen';
+import ProfileScreen from './screens/ProfileScreen';
 
 function App() {
   return (//have to wrap entire App in Router in order to use it
@@ -45,6 +46,7 @@ function App() {
               <Route path="/properties/:id" element={<PropertyScreen/>}/>
               <Route path="/user/properties" element={<UserPropertiesScreen/>}/>
               <Route path="/user/properties/:pageNumber" element={<UserPropertiesScreen/>}/>
+              <Route path="/profile" element={<ProfileScreen/>}/>
 
               {/* Logged user Favourite Properties, Create Property, Check Your Properties, (liked properties), Comments, ProfileScreen,  */}
 

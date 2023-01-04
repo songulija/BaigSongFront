@@ -5,8 +5,10 @@ import "./property.css";
 import { GrLocation } from "react-icons/gr";
 import { MdOutlineEuroSymbol, MdApartment, MdMeetingRoom } from "react-icons/md";
 import { BiBuildingHouse } from "react-icons/bi";
+import { BsHeartFill } from 'react-icons/bs'
 import { getPropertyById } from '../../redux/actions/propertiesActions'
 import { createComment } from "../../redux/actions/propertiesActions";
+import { getUserInfo } from "../../redux/actions/usersActions";
 import PopularPropertiesComponent from "../../popularProperties/PopularPropertiesComponent";
 import { Button, Col, Row } from "react-bootstrap";
 import { Image } from "antd";
@@ -16,12 +18,14 @@ import AddCommentComponent from "../../components/commentsComponents/AddCommentC
 const PropertyScreen = () => {
   const dispatch = useDispatch()
   const params = useParams()
-
+  
   const [addPanel, setAddPanel] = useState(false)
   const usersReducer = useSelector((state) => state.usersReducer);
+  const userInfoReducer = useSelector((state) => state.userInfoReducer)
   const propertiesReducer = useSelector((state) => state.propertiesReducer)
   const { currentUser } = usersReducer;
   const { property } = propertiesReducer;
+  const { role, info } = userInfoReducer
 
   const showAddPanel = () => {
     setAddPanel(true)
@@ -35,7 +39,15 @@ const PropertyScreen = () => {
     setAddPanel(false)
   }
 
+  const isPropertyLiked = () => {
+    const favouriteProperties = JSON.stringify(property.favouriteObjects)
+    const fp = favouriteProperties.find(x => x.user.email === info.email)
+    return fp? true: false
+  }
+
   useEffect(() => {
+    if (currentUser)
+      dispatch(getUserInfo())
     dispatch(getPropertyById(params.id))
   }, [currentUser, params])
 
@@ -65,11 +77,13 @@ const PropertyScreen = () => {
                   <p><GrLocation size={20} /> Address: {property.city ? property.address + ', ' + property.city.title : ''}</p>
                   <p><BiBuildingHouse size={20} /> Rent Type: {property.rentType ? property.rentType.title : ''}</p>
                   <p><MdApartment size={20} /> PropertyType: {property.propertyType ? property.propertyType.title : ''}</p>
+                  <p><BsHeartFill size={20} /> Likes: {property.favouriteObjects ? property.favouriteObjects.length : 0}</p>
                   {/* <span>$40.00</span> */}
-                  <button className="btn btn-outline-dark flex-shrink-0" type="button">
+                  {currentUser ? <button className="btn btn-outline-dark flex-shrink-0" type="button">
                     <i className="bi-cart-fill me-1"></i>
                     Like
-                  </button>
+                  </button> :
+                    <></>}
                 </div>
               </Col>
             </Row>

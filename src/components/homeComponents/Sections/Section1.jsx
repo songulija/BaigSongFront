@@ -20,10 +20,8 @@ const Section1 = () => {
             best quality. Only available in Real Estate
           </p>
 
-          {/* SearchBox */}
           <div className={styles.search_container}>
-            {/* LOCATION */}
-            <div className={styles.location_container}>
+            {/* <div className={styles.location_container}>
               <span>Location</span>
               <input
                 type="text"
@@ -31,7 +29,6 @@ const Section1 = () => {
                 onChange={(e) => setLocation(e.target.value)}
               />
             </div>
-            {/* Price Range */}
             <div className={styles.price_container}>
               <span>Price Range</span>
               <select
@@ -45,11 +42,10 @@ const Section1 = () => {
                 <option value=">500k">{`>500k`}</option>
               </select>
             </div>
-
-            {/* Search Button */}
+            
             <button className={styles.btn_search}>
               <Link to="search">Search</Link>
-            </button>
+            </button> */}
           </div>
         </div>
 

@@ -118,3 +118,50 @@ export const register = (postObject) => async (dispatch) => {
 
 }
 
+
+
+export const getUserInfo = () => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: 'USER_INFO_FETCH_REQUEST'
+        });
+        //getting token from usersReducer state
+        const token = getState().usersReducer.currentUser;
+        const response = await realestateAPI.get(`/api/Accounts/info`, { headers: { Authorization: `Bearer ${token}` } })
+        dispatch({
+            type: 'USER_INFO_FETCH_SUCCESS',
+            payload: response.data
+        });
+    } catch (error) {
+        dispatch({
+            type: 'USER_INFO_FETCH_FAIL',
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        })
+    }
+}
+
+export const updateUser = (postObj, reducerObj) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: 'USER_UPDATE_REQUEST'
+        });
+        //get token from usersReducer
+        const token = getState().usersReducer.currentUser;
+        await realestateAPI.put(`/api/Accounts/${reducerObj.id}`, postObj, { headers: { Authorization: `Bearer ${token}` } })
+        dispatch({
+            type: 'USER_UPDATE_SUCCESS',
+            payload: reducerObj
+        });
+    } catch (error) {
+        dispatch({
+            type: 'USER_UPDATE_SUCCESS',
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        })
+    }
+}

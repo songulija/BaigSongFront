@@ -15,10 +15,10 @@ const AboutUsScreen = () => {
                     <div class="row h-100 align-items-center py-5">
                         <div class="col-lg-6">
                             <h1 class="display-4">About us page</h1>
-                            <p class="lead text-muted mb-0">Create a minimal about us page using Bootstrap 4.</p>
-                            <p class="lead text-muted">Snippet by <a href="https://bootstrapious.com/snippets" class="text-muted">
+                            <p class="lead text-muted mb-0">Real estate rent system for all of us.</p>
+                            {/* <p class="lead text-muted">Snippet by <a href="https://bootstrapious.com/snippets" class="text-muted">
                                 <u>Bootstrapious</u></a>
-                            </p>
+                            </p> */}
                         </div>
                         <div class="col-lg-6 d-none d-lg-block">
                             <img src="https://bootstrapious.com/i/snippets/sn-about/illus.png" alt="" class="img-fluid" />
@@ -121,7 +121,7 @@ const AboutUsScreen = () => {
 
             <footer class="bg-light pb-5">
                 <div class="container text-center">
-                    <p class="font-italic text-muted mb-0">&copy; Copyrights Company.com All rights reserved.</p>
+                    <p class="font-italic text-muted mb-0">&copy; Copyrights Ye.com All rights reserved.</p>
                 </div>
             </footer>
         </div>

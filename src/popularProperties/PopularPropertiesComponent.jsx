@@ -18,7 +18,7 @@ const Section3 = ({title}) => {
     <section className={styles.section_3}>
       <div className={styles.section_3_title}>
         <h1>{title}</h1>
-        <ArrowButton text="See More" path="buy" />
+        {/* <ArrowButton text="See More" path="buy" /> */}
       </div>
 
       {/* CARDS / CAROUSEL */}
