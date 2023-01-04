@@ -23,14 +23,17 @@ export const getProperties = () => async (dispatch, getState) => {
 }
 
 // Properties By User Id
-export const getPropertiesByUserId = (id) => async (dispatch, getState) => {
+export const getPropertiesByUserId = (itemsPerPage, pageNumber) => async (dispatch, getState) => {
     try {
         dispatch({
             type: 'PROPERTIES_BY_USER_ID_FETCH_REQUEST'
         });
+        const perPage = itemsPerPage >= 3? itemsPerPage : 3
+        const pageNum = pageNumber > 0? pageNumber : 1 
         //getting token from usersReducer state
         const token = getState().usersReducer.currentUser;
-        const response = await realestateAPI.get(`/api/Properties/user/${id}`, { headers: { Authorization: `Bearer ${token}` } })
+        const response = await realestateAPI.get(`/api/Properties/user?Page=${pageNum}&ItemsPerPage=${perPage}`, { headers: { Authorization: `Bearer ${token}` } })
+        console.log(JSON.stringify(response))
         dispatch({
             type: 'PROPERTIES_BY_USER_ID_FETCH_SUCCESS',
             payload: response.data

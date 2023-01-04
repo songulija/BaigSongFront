@@ -1,15 +1,15 @@
-export const propertiesReducer = (state = { properties: [], property: {}, top_liked_properties: [] }, action) => {
+export const propertiesReducer = (state = { properties: [], pagination: {}, property: {}, top_liked_properties: [] }, action) => {
     switch (action.type) {
         case 'PROPERTIES_FETCH_REQUEST':
-            return { ...state, loading: true }
+            return { ...state, loading: true, pagination: {} }
         case 'PROPERTIES_FETCH_SUCCESS':
             return { ...state, loading: false, properties: action.payload }
         case 'PROPERTIES_FETCH_FAIL':
             return { ...state, loading: false, error: action.payload }
         case 'PROPERTIES_BY_USER_ID_FETCH_REQUEST':
-            return { ...state, loading: true }
+            return { ...state, loading: true, pagination: {} }
         case 'PROPERTIES_BY_USER_ID_FETCH_SUCCESS':
-            return { ...state, loading: false, properties: action.payload }
+            return { ...state, loading: false, properties: action.payload.properties, pagination: action.payload.pagination }
         case 'PROPERTIES_BY_USER_ID_FETCH_FAIL':
             return { ...state, loading: false, error: action.payload }            
         case 'PROPERTIES_BY_PROPERTY_TYPE_ID_FETCH_REQUEST':
