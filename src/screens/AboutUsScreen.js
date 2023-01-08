@@ -15,13 +15,13 @@ const AboutUsScreen = () => {
                     <div class="row h-100 align-items-center py-5">
                         <div class="col-lg-6">
                             <h1 class="display-4">About us page</h1>
-                            <p class="lead text-muted mb-0">Real estate rent system for all of us.</p>
+                            <p class="lead text-muted mb-0">Real estate rent system for all of us. Located in Vienna’s center, Hilton Vienna Park is next to the City Park and opposite the Wien-Mitte/Landstraße Underground Station and the City Airport Train (CAT), which takes guests to Vienna...</p>
                             {/* <p class="lead text-muted">Snippet by <a href="https://bootstrapious.com/snippets" class="text-muted">
                                 <u>Bootstrapious</u></a>
                             </p> */}
                         </div>
                         <div class="col-lg-6 d-none d-lg-block">
-                            <img src="https://bootstrapious.com/i/snippets/sn-about/illus.png" alt="" class="img-fluid" />
+                            <img src="https://cf.bstatic.com/xdata/images/hotel/square600/226647573.webp?k=a624405b0652700cfa17b5fc9b2f59bca74a9d05be5fdb6267d3e4fc0c9857d7&o=&s=1" alt="" class="img-fluid" />
                         </div>
                     </div>
                 </div>
@@ -31,20 +31,11 @@ const AboutUsScreen = () => {
                 <div class="container py-5">
                     <div class="row align-items-center mb-5">
                         <div class="col-lg-6 order-2 order-lg-1"><i class="fa fa-bar-chart fa-2x mb-3 text-primary"></i>
-                            <h2 class="font-weight-light">Lorem ipsum dolor sit amet</h2>
-                            <p class="font-italic text-muted mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><a href="#" class="btn btn-light px-5 rounded-pill shadow-sm">Learn More</a>
+                            <h2 class="font-weight-light">Relax - Ferienhaus in WienOpens in new window</h2>
+                            <p class="font-italic text-muted mb-4">Located in Vienna, just 4.5 miles from Austria Center Vienna, Relax - Ferienhaus in Wien provides beachfront accommodations with a garden, a restaurant, water sports facilities and free WiFi.</p><a href="#" class="btn btn-light px-5 rounded-pill shadow-sm">Learn More</a>
                         </div>
                         <div class="col-lg-5 px-5 mx-auto order-1 order-lg-2">
-                            <img src="https://bootstrapious.com/i/snippets/sn-about/img-1.jpg" alt="" class="img-fluid mb-4 mb-lg-0" />
-                        </div>
-                    </div>
-                    <div class="row align-items-center">
-                        <div class="col-lg-5 px-5 mx-auto">
-                            <img src="https://bootstrapious.com/i/snippets/sn-about/img-2.jpg" alt="" class="img-fluid mb-4 mb-lg-0" />
-                        </div>
-                        <div class="col-lg-6"><i class="fa fa-leaf fa-2x mb-3 text-primary"></i>
-                            <h2 class="font-weight-light">Lorem ipsum dolor sit amet</h2>
-                            <p class="font-italic text-muted mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><a href="#" class="btn btn-light px-5 rounded-pill shadow-sm">Learn More</a>
+                            <img src="https://cf.bstatic.com/xdata/images/hotel/square600/233144150.webp?k=386e569ddd437b489982982aa812caa1eb29694e76bedcbe7f06446963ecba4a&o=&s=1" alt="" class="img-fluid mb-4 mb-lg-0" />
                         </div>
                     </div>
                 </div>
@@ -117,7 +108,6 @@ const AboutUsScreen = () => {
                     </div>
                 </div>
             </div>
-
 
             <footer class="bg-light pb-5">
                 <div class="container text-center">

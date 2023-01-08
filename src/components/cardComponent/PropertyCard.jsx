@@ -90,7 +90,7 @@ const PropertyCard = (props) => {
             Price: {property.price} <MdOutlineEuroSymbol size={20} />
           </Card.Text>
         </div>
-        <Button variant="dark" href={`/properties/${property.id}`}>Detailed?</Button>
+        <Button variant="dark" href={`/property/${property.id}`}>Detailed?</Button>
       </Card.Body>
     </Card>
   );

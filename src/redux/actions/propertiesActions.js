@@ -1,12 +1,14 @@
 import realestateAPI from './realestateAPI';
-export const getProperties = () => async (dispatch, getState) => {
+export const getProperties = (itemsPerPage, pageNumber) => async (dispatch, getState) => {
     try {
         dispatch({
             type: 'PROPERTIES_FETCH_REQUEST'
         });
+        const perPage = itemsPerPage >= 3 ? itemsPerPage : 3
+        const pageNum = pageNumber > 0 ? pageNumber : 1
         //getting token from usersReducer state
         const token = getState().usersReducer.currentUser;
-        const response = await realestateAPI.get(`/api/Properties`, { headers: { Authorization: `Bearer ${token}` } })
+        const response = await realestateAPI.get(`/api/Properties?Page=${pageNum}&ItemsPerPage=${perPage}`, { headers: { Authorization: `Bearer ${token}` } })
         dispatch({
             type: 'PROPERTIES_FETCH_SUCCESS',
             payload: response.data
@@ -28,8 +30,8 @@ export const getPropertiesByUserId = (itemsPerPage, pageNumber) => async (dispat
         dispatch({
             type: 'PROPERTIES_BY_USER_ID_FETCH_REQUEST'
         });
-        const perPage = itemsPerPage >= 3? itemsPerPage : 3
-        const pageNum = pageNumber > 0? pageNumber : 1 
+        const perPage = itemsPerPage >= 3 ? itemsPerPage : 3
+        const pageNum = pageNumber > 0 ? pageNumber : 1
         //getting token from usersReducer state
         const token = getState().usersReducer.currentUser;
         const response = await realestateAPI.get(`/api/Properties/user?Page=${pageNum}&ItemsPerPage=${perPage}`, { headers: { Authorization: `Bearer ${token}` } })
@@ -151,7 +153,7 @@ export const createProperty = (postObject) => async (dispatch, getState) => {
         });
         //get token from usersReducer
         const token = getState().usersReducer.currentUser;
-        const response = await realestateAPI.post(`/api/Properties`, postObject, { headers: { Authorization: `Bearer ${token}`,'Content-Type': 'multipart/form-data' } })
+        const response = await realestateAPI.post(`/api/Properties`, postObject, { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' } })
         dispatch({
             type: 'PROPERTIES_CREATE_SUCCESS',
             payload: response.data
@@ -200,7 +202,7 @@ export const updateProperty = (postObj) => async (dispatch, getState) => {
         const token = getState().usersReducer.currentUser;
         //get id from form data
         const id = postObj.get('id')
-        const response = await realestateAPI.put(`/api/Properties/${id}`, postObj, { headers: { Authorization: `Bearer ${token}`,'Content-Type': 'multipart/form-data' } })
+        const response = await realestateAPI.put(`/api/Properties/${id}`, postObj, { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' } })
         dispatch({
             type: 'PROPERTIES_UPDATE_SUCCESS',
             payload: response.data
@@ -216,20 +218,65 @@ export const updateProperty = (postObj) => async (dispatch, getState) => {
     }
 }
 
-export const deleteProperty = (id) => async(dispatch,getState)=>{
-    try{
+export const deleteProperty = (id) => async (dispatch, getState) => {
+    try {
         dispatch({
             type: 'PROPERTIES_DELETE_REQUEST'
         })
         const token = getState().usersReducer.currentUser;
-        await realestateAPI.delete(`/api/Properties/${id}`,{headers: {Authorization: `Bearer ${token}`}})
+        await realestateAPI.delete(`/api/Properties/${id}`, { headers: { Authorization: `Bearer ${token}` } })
         dispatch({
             type: 'PROPERTIES_DELETE_SUCCESS',
             payload: id
         })
-    }catch (error) {
+    } catch (error) {
         dispatch({
             type: 'PROPERTIES_DELETE_FAIL',
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        })
+    }
+}
+
+export const likeProperty = (postObject) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: 'PROPERTY_LIKE_CREATE_REQUEST'
+        });
+        //get token from usersReducer
+        const token = getState().usersReducer.currentUser;
+        const response = await realestateAPI.put(`/api/Properties/${postObject.id}/like`, postObject, { headers: { Authorization: `Bearer ${token}` } })
+        dispatch({
+            type: 'PROPERTY_LIKE_CREATE_SUCCESS',
+            payload: response.data
+        });
+    } catch (error) {
+        dispatch({
+            type: 'PROPERTY_LIKE_CREATE_FAIL',
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        })
+    }
+}
+
+export const deleteLike = (postObject) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: 'PROPERTY_LIKE_DELETE_REQUEST'
+        })
+        const token = getState().usersReducer.currentUser;
+        const response = await realestateAPI.put(`/api/Properties/${postObject.id}/like`, postObject, { headers: { Authorization: `Bearer ${token}` } })
+        dispatch({
+            type: 'PROPERTY_LIKE_DELETE_SUCCESS',
+            payload: response.data
+        })
+    } catch (error) {
+        dispatch({
+            type: 'PROPERTY_LIKE_DELETE_FAIL',
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message

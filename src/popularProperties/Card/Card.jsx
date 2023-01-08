@@ -128,7 +128,7 @@ const Card = (props) => {
           </div>
           {/* SEE MORE BUTTON */}
           <div className={styles.card_btn}>
-            <Link to={`/properties/${property.id}`}>See More</Link>
+            <Link to={`/property/${property.id}`}>See More</Link>
           </div>
         </div>
       </div>

@@ -7,18 +7,19 @@ import { MdOutlineEuroSymbol, MdApartment, MdMeetingRoom } from "react-icons/md"
 import { BiBuildingHouse } from "react-icons/bi";
 import { BsHeartFill } from 'react-icons/bs'
 import { getPropertyById } from '../../redux/actions/propertiesActions'
-import { createComment } from "../../redux/actions/propertiesActions";
+import { createComment, likeProperty, deleteLike } from "../../redux/actions/propertiesActions";
 import { getUserInfo } from "../../redux/actions/usersActions";
 import PopularPropertiesComponent from "../../popularProperties/PopularPropertiesComponent";
 import { Button, Col, Row } from "react-bootstrap";
 import { Image } from "antd";
 import CommentCardComponent from "../../components/commentsComponents/CommentCardComponent";
 import AddCommentComponent from "../../components/commentsComponents/AddCommentComponent";
+import moment from 'moment'
 
 const PropertyScreen = () => {
   const dispatch = useDispatch()
   const params = useParams()
-  
+
   const [addPanel, setAddPanel] = useState(false)
   const usersReducer = useSelector((state) => state.usersReducer);
   const userInfoReducer = useSelector((state) => state.userInfoReducer)
@@ -39,10 +40,27 @@ const PropertyScreen = () => {
     setAddPanel(false)
   }
 
-  const isPropertyLiked = () => {
-    const favouriteProperties = JSON.stringify(property.favouriteObjects)
-    const fp = favouriteProperties.find(x => x.user.email === info.email)
-    return fp? true: false
+  const like = () => {
+    var postObj = {
+      ...property,
+      "like": true,
+      "favouriteObject": {
+        id: 0,
+        userId: 0,
+        propertyId: property.id,
+        date: moment().format('YYYY/MM/DD')
+      }
+    }
+    dispatch(likeProperty(postObj))
+  }
+
+  const unlike = () => {
+    var postObj = {
+      ...property,
+      "like": false
+    }
+    console.log(postObj)
+    dispatch(deleteLike(postObj))
   }
 
   useEffect(() => {
@@ -79,11 +97,24 @@ const PropertyScreen = () => {
                   <p><MdApartment size={20} /> PropertyType: {property.propertyType ? property.propertyType.title : ''}</p>
                   <p><BsHeartFill size={20} /> Likes: {property.favouriteObjects ? property.favouriteObjects.length : 0}</p>
                   {/* <span>$40.00</span> */}
-                  {currentUser ? <button className="btn btn-outline-dark flex-shrink-0" type="button">
-                    <i className="bi-cart-fill me-1"></i>
-                    Like
-                  </button> :
-                    <></>}
+                  {currentUser ?
+                    <div>
+                      {property.liked === true?
+                        <button onClick={unlike} className="btn btn-dark flex-shrink-0" type="button">
+                          <i className="bi-cart-fill me-1"></i>
+                          Unlike
+                        </button>
+                        :
+                        <button onClick={like} className="btn btn-outline-dark flex-shrink-0" type="button">
+                          <i className="bi-cart-fill me-1"></i>
+                          Like
+                        </button>}
+                    </div>
+                    :
+                    <button disabled={true} className="btn btn-outline-dark flex-shrink-0" type="button">
+                      <i className="bi-cart-fill me-1"></i>
+                      Like
+                    </button>}
                 </div>
               </Col>
             </Row>

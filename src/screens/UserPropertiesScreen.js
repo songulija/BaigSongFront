@@ -81,6 +81,7 @@ function UserPropertiesScreen() {
     }
 
     const onShowSizeChange = (data) => {
+        console.log(data)
         navigate(`/user/properties/${data}`)
     };
 

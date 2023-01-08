@@ -3,7 +3,7 @@ export const propertiesReducer = (state = { properties: [], pagination: {}, prop
         case 'PROPERTIES_FETCH_REQUEST':
             return { ...state, loading: true, pagination: {} }
         case 'PROPERTIES_FETCH_SUCCESS':
-            return { ...state, loading: false, properties: action.payload }
+            return { ...state, loading: false, properties: action.payload.properties, pagination: action.payload.pagination}
         case 'PROPERTIES_FETCH_FAIL':
             return { ...state, loading: false, error: action.payload }
         case 'PROPERTIES_BY_USER_ID_FETCH_REQUEST':
@@ -46,11 +46,22 @@ export const propertiesReducer = (state = { properties: [], pagination: {}, prop
         case 'PROPERTY_COMMENTS_CREATE_REQUEST':
             return { ...state, loading: true }
         case 'PROPERTY_COMMENTS_CREATE_SUCCESS':
-            // ...item, obj: [...item.obj, output]
             const newPropertyComment = {...state.property, comments: [...state.property.comments, {...action.payload}]}
-            console.log(newPropertyComment)
             return { ...state, loading: false, property: newPropertyComment}
         case 'PROPERTY_COMMENTS_CREATE_FAIL':
+            return { ...state, loading: false, error: action.payload }
+        case 'PROPERTY_LIKE_CREATE_REQUEST':
+            return { ...state, loading: true }
+        case 'PROPERTY_LIKE_CREATE_SUCCESS':
+            const newPropertyLike = {...state.property, liked: action.payload.liked, favouriteObjects: [...state.property.favouriteObjects, {...action.payload}]}
+            return { ...state, loading: false, property: newPropertyLike}
+        case 'PROPERTY_LIKES_CREATE_FAIL':
+            return { ...state, loading: false, error: action.payload }
+        case 'PROPERTY_LIKE_DELETE_REQUEST':
+            return { ...state, loading: true }
+        case 'PROPERTY_LIKE_DELETE_SUCCESS':
+            return { ...state, loading: false, property: action.payload}
+        case 'PROPERTY_LIKE_DELETE_FAIL':
             return { ...state, loading: false, error: action.payload }
         case 'PROPERTIES_UPDATE_REQUEST':
             return { ...state, loading: true }

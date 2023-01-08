@@ -118,7 +118,7 @@ const MyPropertyCard = (props) => {
                   Price: {property.price} <MdOutlineEuroSymbol size={20} />
                 </Card.Text>
               </div>
-              <Button variant="dark" href={`/properties/${property.id}`}>Detailed?</Button>
+              <Button variant="dark" href={`/property/${property.id}`}>Detailed?</Button>
               <Button onClick={(e) => showUpdateModal(property)}>Update</Button>
               <Popconfirm title="Delete?" onConfirm={() => deleteRecord(property.id)}>
                 <Button type="primary" danger>Delete</Button>
