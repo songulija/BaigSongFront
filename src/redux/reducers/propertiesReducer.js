@@ -6,6 +6,12 @@ export const propertiesReducer = (state = { properties: [], pagination: {}, prop
             return { ...state, loading: false, properties: action.payload.properties, pagination: action.payload.pagination}
         case 'PROPERTIES_FETCH_FAIL':
             return { ...state, loading: false, error: action.payload }
+        case 'PROPERTIES_ALL_FETCH_REQUEST':
+            return { ...state, loading: true, pagination: {} }
+        case 'PROPERTIES_ALL_FETCH_SUCCESS':
+            return { ...state, loading: false, properties: action.payload}
+        case 'PROPERTIES_ALL_FETCH_FAIL':
+            return { ...state, loading: false, error: action.payload }
         case 'PROPERTIES_BY_USER_ID_FETCH_REQUEST':
             return { ...state, loading: true, pagination: {} }
         case 'PROPERTIES_BY_USER_ID_FETCH_SUCCESS':

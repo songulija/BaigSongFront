@@ -4,22 +4,30 @@ import { getProperties } from '../../redux/actions/propertiesActions'
 import { Row, Col, Container, Card, ListGroup } from 'react-bootstrap'
 import { Pagination } from 'antd'
 import PropertyCard from "../cardComponent/PropertyCard";
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useLocation } from 'react-router-dom'
 
 const PropertiesList = () => {
   const navigate = useNavigate()
+  const location = useLocation()
   const params = useParams()
   const dispatch = useDispatch()
   const propertiesReducer = useSelector((state) => state.propertiesReducer)
   const { properties, pagination } = propertiesReducer;
-  const pageNumber = params.pageNumber ? params.pageNumber : 1;
+  // const pageNumber = params.pageNumber ? params.pageNumber : 1;
   const onShowSizeChange = (data) => {
-    console.log(data)
-    navigate(`/properties/${data}`)
+    const queryParams = new URLSearchParams(location.search)
+    queryParams.set('page', data)
+    queryParams.set('itemsPerPage', 10)
+    const params = queryParams.toString()
+    // console.log(params)
+    navigate(`/properties?${params}`)
   };
   useEffect(() => {
-    dispatch(getProperties(10, pageNumber))
-  }, [dispatch, navigate, pageNumber])
+    const queryParams = new URLSearchParams(location.search)
+    const params = queryParams.toString()
+    console.log(params)
+    dispatch(getProperties(params))
+  }, [dispatch, navigate, location.search])
   return (
     <div className="album py-5">
       <div className="container">

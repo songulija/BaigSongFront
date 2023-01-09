@@ -19,11 +19,24 @@ function Header() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const [title, setTitle] = useState(null)
     //check if user is logged in. getting  userLogin state
     const usersReducer = useSelector((state) => state.usersReducer);
     const userInfoReducer = useSelector((state) => state.userInfoReducer);
     const { currentUser } = usersReducer;
     const { role } = userInfoReducer
+
+    const searchProperties = () => {
+        if (title !== null)
+            navigate(`/properties?page=1&itemsPerPage=10&title=${title}`)
+        else 
+            navigate('/properties?page=1&itemsPerPage=10')
+    }
+
+    const onDataChange = (data) => {
+        console.log(data)
+        setTitle(data)
+    }
 
     const logoutHandler = () => {
         dispatch(logout());
@@ -39,7 +52,7 @@ function Header() {
                         <Nav className="me-auto">
                             <Nav.Link href="/">Home</Nav.Link>
                             <Nav.Link href="/about">About</Nav.Link>
-                            <Nav.Link href="/properties">Rent</Nav.Link>
+                            <Nav.Link href="/properties?page=1&itemsPerPage=10">Rent</Nav.Link>
                             <Nav.Link href="/contact">Contact</Nav.Link>
                             {currentUser !== null && role === "ADMINISTRATOR" ?
                                 <NavDropdown title="Admin" id="navbarScrollingDropdown">
@@ -75,6 +88,17 @@ function Header() {
                             <Nav.Link eventKey={2} href="#memes">
                                 Dank memes
                             </Nav.Link> */}
+                            <Form className="d-flex">
+                                <Form.Control
+                                    onChange={(e) => onDataChange(e.target.value)}
+                                    type="search"
+                                    placeholder="Search"
+                                    className="me-2"
+                                    aria-label="Search"
+                                    value={title}
+                                />
+                                <Button onClick={searchProperties} variant="outline-dark">Search</Button>
+                            </Form>
                             <a href='/user/properties'><MdOutlineRealEstateAgent title='My Properties' size={40} style={{ padding: 5, cursor: 'pointer', color: 'black' }} /></a>
                             <a href='/favourite-properties'><AiOutlineHeart title='Favourite properties' size={40} style={{ padding: 5, cursor: 'pointer', color: 'black' }} /></a>
                             {currentUser ?

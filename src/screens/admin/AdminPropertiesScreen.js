@@ -5,7 +5,7 @@ import { PlusOutlined } from '@ant-design/icons'
 import { Button } from "react-bootstrap";
 import "../../styles/Login.css";
 import { tableCardStyle, tableCardBodyStyle, buttonStyle } from '../../styles/customStyles.js';
-import { getProperties, createProperty, updateProperty, deleteProperty } from '../../redux/actions/propertiesActions'
+import { getAllProperties, createProperty, updateProperty, deleteProperty } from '../../redux/actions/propertiesActions'
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment';
 import AddPropertyComponent from '../../components/propertiesComponents/AddPropertyComponent';
@@ -167,7 +167,7 @@ function AdminPropertiesScreen() {
 
     useEffect(() => {
         if (currentUser !== null && role === "ADMINISTRATOR") {
-            dispatch(getProperties())
+            dispatch(getAllProperties())
         } else {
             navigate('/')
         }

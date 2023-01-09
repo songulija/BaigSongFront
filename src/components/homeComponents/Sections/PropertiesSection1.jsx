@@ -1,13 +1,38 @@
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import styles from "./Section1.module.scss";
-
-import { Link } from "react-router-dom";
-import { useState } from "react";
 import building6 from "../../../assets/building6.jpg";
+import { getCities } from "../../../redux/actions/citiesActions";
+import { getPropertyTypes } from "../../../redux/actions/propertyTypesActions";
+import { useDispatch, useSelector } from "react-redux";
+import { Button } from "react-bootstrap";
 
 const PropertiesSection1 = () => {
-  const [price, setPrice] = useState("<100k");
-  const [location, setLocation] = useState("");
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
+  const citiesListReducer = useSelector((state) => state.citiesListReducer)
+  const { cities } = citiesListReducer;
+  const propertyTypesReducer = useSelector((state) => state.propertyTypesReducer)
+  const { propertyTypes } = propertyTypesReducer;
+
+  const [propertyTypeId, setPropertyTypeId] = useState(2)
+  const [cityId, setCityId] = useState(1)
+
+  const searchProperties = () => {
+    if (cityId > 0 && propertyTypeId > 0)
+      navigate(`/properties?page=1&itemsPerPage=10&cityId=${cityId}&propertyTypeId=${propertyTypeId}`)
+    else if (cityId > 0 && propertyTypeId <= 0)
+      navigate(`/properties?page=1&itemsPerPage=10&cityId=${cityId}`)
+    else if (cityId <= 0 && propertyTypeId > 0)
+      navigate(`/properties?page=1&itemsPerPage=10&propertyTypeId=${propertyTypeId}`)
+    else
+      navigate(`/properties?page=1&itemsPerPage=10&`)
+  }
+  useEffect(() => {
+    dispatch(getCities())
+    dispatch(getPropertyTypes())
+  }, [dispatch, navigate])
   return (
     <section className={styles.section_1}>
       {/* SECTION 1 CONTENT */}
@@ -19,37 +44,41 @@ const PropertiesSection1 = () => {
             Search and find your dream property at affordable prices, but with the
             best quality. Only available in Real Estate
           </p>
-
-          {/* SearchBox */}
           <div className={styles.search_container}>
             {/* LOCATION */}
             <div className={styles.location_container}>
-              <span>Location</span>
-              <input
-                type="text"
-                placeholder="Enter a Location"
-                onChange={(e) => setLocation(e.target.value)}
-              />
-            </div>
-            {/* Price Range */}
-            <div className={styles.price_container}>
-              <span>Price Range</span>
+              <span>City</span>
               <select
-                name="Price"
                 id="price"
-                onChange={(e) => setPrice(e.target.value)}
+                name="City"
+                placeholder="Select City"
+                defaultValue={cityId}
+                value={cityId}
+                onChange={(e) => setCityId(e.target.value)}
               >
-                <option value="<100k">{`<100k`}</option>
-                <option value="100k-200k">100k-200k</option>
-                <option value="200k-500k">200k-500k</option>
-                <option value=">500k">{`>500k`}</option>
+                {cities.map((element) => {
+                  return (<option key={element.id} value={element.id}>{element.title}</option>)
+                })}
               </select>
             </div>
 
-            {/* Search Button */}
-            <button className={styles.btn_search}>
-              <Link to="search">Search</Link>
-            </button>
+            <div className={styles.price_container}>
+              <span>Property Type</span>
+              <select
+                id="propertyType"
+                name="Property Type"
+                placeholder="Select Property Type"
+                defaultValue={propertyTypeId}
+                value={propertyTypeId}
+                onChange={(e) => setPropertyTypeId(e.target.value)}
+              >
+                {propertyTypes.map((element) => {
+                  return (<option key={element.id} value={element.id}>{element.title}</option>)
+                })}
+              </select>
+            </div>
+
+            <Button onClick={searchProperties} variant="outline-dark">Search</Button>
           </div>
         </div>
 

@@ -43,7 +43,7 @@ function App() {
               <Route path="/about" element={<AboutUsScreen />} />
               <Route path="/contact" element={<ContactUsScreen />} />
               <Route path="/properties" element={<PropertiesScreen />} />
-              <Route path="/properties/:pageNumber" element={<PropertiesScreen />} />
+              {/* <Route path="/properties/:pageNumber" element={<PropertiesScreen />} /> */}
               <Route path="/property/:id" element={<PropertyScreen/>}/>
               <Route path="/user/properties" element={<UserPropertiesScreen/>}/>
               <Route path="/user/properties/:pageNumber" element={<UserPropertiesScreen/>}/>

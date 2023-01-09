@@ -1,14 +1,16 @@
 import realestateAPI from './realestateAPI';
-export const getProperties = (itemsPerPage, pageNumber) => async (dispatch, getState) => {
+export const getProperties = (params) => async (dispatch, getState) => {
     try {
         dispatch({
             type: 'PROPERTIES_FETCH_REQUEST'
         });
-        const perPage = itemsPerPage >= 3 ? itemsPerPage : 3
-        const pageNum = pageNumber > 0 ? pageNumber : 1
+        // const perPage = itemsPerPage >= 3 ? itemsPerPage : 3
+        // const pageNum = pageNumber > 0 ? pageNumber : 1
         //getting token from usersReducer state
+
+        //Page=${pageNum}&ItemsPerPage=${perPage}
         const token = getState().usersReducer.currentUser;
-        const response = await realestateAPI.get(`/api/Properties?Page=${pageNum}&ItemsPerPage=${perPage}`, { headers: { Authorization: `Bearer ${token}` } })
+        const response = await realestateAPI.get(`/api/Properties/search?${params}`, { headers: { Authorization: `Bearer ${token}` } })
         dispatch({
             type: 'PROPERTIES_FETCH_SUCCESS',
             payload: response.data
@@ -16,6 +18,33 @@ export const getProperties = (itemsPerPage, pageNumber) => async (dispatch, getS
     } catch (error) {
         dispatch({
             type: 'PROPERTIES_FETCH_FAIL',
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        })
+    }
+}
+
+export const getAllProperties = (params) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: 'PROPERTIES_ALL_FETCH_REQUEST'
+        });
+        // const perPage = itemsPerPage >= 3 ? itemsPerPage : 3
+        // const pageNum = pageNumber > 0 ? pageNumber : 1
+        //getting token from usersReducer state
+
+        //Page=${pageNum}&ItemsPerPage=${perPage}
+        const token = getState().usersReducer.currentUser;
+        const response = await realestateAPI.get(`/api/Properties`, { headers: { Authorization: `Bearer ${token}` } })
+        dispatch({
+            type: 'PROPERTIES_ALL_FETCH_SUCCESS',
+            payload: response.data
+        });
+    } catch (error) {
+        dispatch({
+            type: 'PROPERTIES_ALL_FETCH_FAIL',
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message
