@@ -51,7 +51,7 @@ const Section1 = () => {
 
         {/* Building Image */}
         <div className={styles.slogan_image}>
-          <img src={building1} alt="building" />
+          <img src='https://cf.bstatic.com/xdata/images/hotel/square600/121399207.webp?k=b0e7119a0ba3354de23997d3698aac0296822fd58a590d83ddbb372f8af887a9&o=&s=1' alt="building" />
         </div>
       </div>
     </section>

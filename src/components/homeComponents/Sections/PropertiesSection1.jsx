@@ -84,7 +84,7 @@ const PropertiesSection1 = () => {
 
         {/* Building Image */}
         <div className={styles.slogan_image}>
-          <img src={building6} alt="building" />
+          <img src={'https://cf.bstatic.com/xdata/images/hotel/square600/29466558.webp?k=fa323cf3e030ae6b41c8b475fe2853ae4e9e38148501d68dd5b915905dcea664&o=&s=1'} alt="building" />
         </div>
       </div>
     </section>

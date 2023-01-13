@@ -13,7 +13,7 @@ const Section4 = () => {
       <div className={styles.section_4_content}>
         {/* IMAGE CONTAINER */}
         <div className={styles.image_container}>
-          <img src={building3} alt="building" />
+          <img src={'https://cf.bstatic.com/xdata/images/hotel/square600/187855604.webp?k=bbb45aa5b540c7608ea3af52d92b95a215df9af831dd3ae0e4c4cce501e28b1b&o=&s=1'} alt="building" />
         </div>
         {/* INFO */}
         <div className={styles.info}>

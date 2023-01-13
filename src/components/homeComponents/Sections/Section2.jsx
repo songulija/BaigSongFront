@@ -6,7 +6,7 @@ const Section2 = () => {
     <section className={styles.section_2}>
       {/* IMAGE */}
       <div className={styles.section_2_image_container}>
-        <img src={building2} alt="building2" />
+        <img src='https://cf.bstatic.com/xdata/images/hotel/square600/87428762.webp?k=9a065fcd92168145d8c8358701662c76793535597b678efc8f6921c8e3c188e6&o=&s=1' alt="building2" />
       </div>
 
       {/* SLOGAN */}

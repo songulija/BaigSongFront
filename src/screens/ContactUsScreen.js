@@ -16,10 +16,10 @@ const ContactUsScreen = () => {
                     {/* <ArrowButton text="Get Started" path="search" /> */}
                 </div>
                 <div className={styles.image_container_2}>
-                    <img src={building5} alt="building" />
+                    <img src={'https://cf.bstatic.com/xdata/images/hotel/square600/420377357.webp?k=73f8c029827076805ee781cdf818bb5e5e9b963227d74e4ebe071f3564ae4423&o=&s=1'} alt="building" />
                 </div>
                 <div className={styles.image_container_1}>
-                    <img src={building4} alt="building" />
+                    <img src={'https://cf.bstatic.com/xdata/images/hotel/square600/34405073.webp?k=ca1663aa4fabefe87287d7385b6f2bb62d556220f3ba92248c411120a2f41118&o=&s=1'} alt="building" />
                 </div>
             </section>
 
