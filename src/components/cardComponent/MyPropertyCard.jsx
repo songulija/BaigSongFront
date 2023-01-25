@@ -8,7 +8,7 @@ import { MdOutlineEuroSymbol } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { Button, Card, Col, ListGroup, Row } from 'react-bootstrap'
 import { Image, Popconfirm } from "antd";
-import { updateProperty, deleteProperty } from '../../redux/actions/propertiesActions'
+import { updateProperty, deleteProperty, deleteFavouriteProperty } from '../../redux/actions/propertiesActions'
 import { useDispatch, useSelector } from 'react-redux'
 import UpdatePropertyComponent from "../propertiesComponents/UpdatePropertyComponent";
 
@@ -80,6 +80,10 @@ const MyPropertyCard = (props) => {
     dispatch(deleteProperty(id))
   }
 
+  const unlike = (id) => {
+    dispatch(deleteFavouriteProperty(id))
+  }
+
   useEffect(() => {
     if (props.record)
       setProperty(props.record)
@@ -118,11 +122,24 @@ const MyPropertyCard = (props) => {
                   Price: {property.price} <MdOutlineEuroSymbol size={20} />
                 </Card.Text>
               </div>
-              <Button variant="dark" href={`/property/${property.id}`}>Detailed?</Button>
-              <Button onClick={(e) => showUpdateModal(property)}>Update</Button>
-              <Popconfirm title="Delete?" onConfirm={() => deleteRecord(property.id)}>
-                <Button type="primary" danger>Delete</Button>
-              </Popconfirm>
+              {props.favouriteProperties ?
+                <div>
+                  <button onClick={(e) => unlike(props.fpId)} className="btn btn-dark flex-shrink-0" type="button">
+                    <i className="bi-cart-fill me-1"></i>
+                    Unlike
+                  </button>
+                  <Button variant="light" href={`/property/${property.id}`}>Detailed?</Button>
+                </div>
+                :
+                <div>
+                  <Button variant="dark" href={`/property/${property.id}`}>Detailed?</Button>
+                  <Button onClick={(e) => showUpdateModal(property)}>Update</Button>
+                  <Popconfirm title="Delete?" onConfirm={() => deleteRecord(property.id)}>
+                    <Button type="primary" danger>Delete</Button>
+                  </Popconfirm>
+                </div>
+              }
+
             </Card.Body>
           </Col>
         </Row>

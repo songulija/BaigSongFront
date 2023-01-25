@@ -80,6 +80,33 @@ export const getPropertiesByUserId = (itemsPerPage, pageNumber) => async (dispat
     }
 }
 
+//get user liked properties
+// Properties By User Id
+export const getUserFavouriteProperties = (itemsPerPage, pageNumber) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: 'USER_FAVOURITE_PROPERTIES_FETCH_REQUEST'
+        });
+        const perPage = itemsPerPage >= 3 ? itemsPerPage : 3
+        const pageNum = pageNumber > 0 ? pageNumber : 1
+        //getting token from usersReducer state
+        const token = getState().usersReducer.currentUser;
+        const response = await realestateAPI.get(`/api/FavouriteProperties/user?Page=${pageNum}&ItemsPerPage=${perPage}`, { headers: { Authorization: `Bearer ${token}` } })
+        dispatch({
+            type: 'USER_FAVOURITE_PROPERTIES_FETCH_SUCCESS',
+            payload: response.data
+        });
+    } catch (error) {
+        dispatch({
+            type: 'USER_FAVOURITE_PROPERTIES_FETCH_FAIL',
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        })
+    }
+}
+
 //Properties By Property Type Id (Hotels=1, Apartments=2 ....)
 export const getPropertiesByPropertyTypeId = (id) => async (dispatch, getState) => {
     try {
@@ -261,6 +288,28 @@ export const deleteProperty = (id) => async (dispatch, getState) => {
     } catch (error) {
         dispatch({
             type: 'PROPERTIES_DELETE_FAIL',
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message,
+        })
+    }
+}
+
+export const deleteFavouriteProperty = (id) => async (dispatch, getState) => {
+    try {
+        dispatch({
+            type: 'FAVOURITE_PROPERTIES_DELETE_REQUEST'
+        })
+        const token = getState().usersReducer.currentUser;
+        await realestateAPI.delete(`/api/FavouriteProperties/${id}`, { headers: { Authorization: `Bearer ${token}` } })
+        dispatch({
+            type: 'FAVOURITE_PROPERTIES_DELETE_SUCCESS',
+            payload: id
+        })
+    } catch (error) {
+        dispatch({
+            type: 'FAVOURITE_PROPERTIES_DELETE_FAIL',
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message

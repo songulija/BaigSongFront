@@ -1,4 +1,4 @@
-export const propertiesReducer = (state = { properties: [], pagination: {}, property: {}, top_liked_properties: [] }, action) => {
+export const propertiesReducer = (state = { properties: [], favouriteProperties: [], pagination: {}, property: {}, top_liked_properties: [] }, action) => {
     switch (action.type) {
         case 'PROPERTIES_FETCH_REQUEST':
             return { ...state, loading: true, pagination: {} }
@@ -17,7 +17,13 @@ export const propertiesReducer = (state = { properties: [], pagination: {}, prop
         case 'PROPERTIES_BY_USER_ID_FETCH_SUCCESS':
             return { ...state, loading: false, properties: action.payload.properties, pagination: action.payload.pagination }
         case 'PROPERTIES_BY_USER_ID_FETCH_FAIL':
-            return { ...state, loading: false, error: action.payload }            
+            return { ...state, loading: false, error: action.payload }   
+        case 'USER_FAVOURITE_PROPERTIES_FETCH_REQUEST':
+            return { ...state, loading: true, pagination: {} }
+        case 'USER_FAVOURITE_PROPERTIES_FETCH_SUCCESS':
+            return { ...state, loading: false, favouriteProperties: action.payload.favouriteProperties, pagination: action.payload.pagination }
+        case 'USER_FAVOURITE_PROPERTIES_FETCH_FAIL':
+            return { ...state, loading: false, error: action.payload }              
         case 'PROPERTIES_BY_PROPERTY_TYPE_ID_FETCH_REQUEST':
             return { ...state, loading: true }
         case 'PROPERTIES_BY_PROPERTY_TYPE_ID_FETCH_SUCCESS':
@@ -83,6 +89,13 @@ export const propertiesReducer = (state = { properties: [], pagination: {}, prop
             const _properties = state.properties.filter(x => x.id !== action.payload);
             return { ...state, properties: _properties };
         case 'PROPERTIES_DELETE_FAIL':
+            return { ...state, loading: false, error: action.payload }
+        case 'FAVOURITE_PROPERTIES_DELETE_REQUEST':
+            return { ...state, loading: true }
+        case 'FAVOURITE_PROPERTIES_DELETE_SUCCESS':
+            const filtered_properties = state.favouriteProperties.filter(x => x.id !== action.payload);
+            return { ...state, favouriteProperties: filtered_properties };
+        case 'FAVOURITE_PROPERTIES_DELETE_FAIL':
             return { ...state, loading: false, error: action.payload }
         default:
             return state;
